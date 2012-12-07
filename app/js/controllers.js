@@ -24,10 +24,17 @@ function LoginController($scope, $location, $cookieStore) {
 }
 LoginController.$inject = ['$scope', '$location', '$cookieStore'];
 
-function ProjectsController($scope, $cookieStore, $location) {
+function LogoutController($scope, $cookieStore, $location) {
 	$scope.logout = function() {
 		$cookieStore.remove('loginHash');
 		$location.path('/login');
 	}
 }
-ProjectsController.$inject = ['$scope', '$cookieStore', '$location'];
+
+LogoutController.$inject = ['$scope', '$cookieStore', '$location'];
+
+function ProjectsController($scope) {
+
+}
+
+ProjectsController.$inject = ['$scope'];
