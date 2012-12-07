@@ -30,14 +30,12 @@ function LogoutController($scope, $cookieStore, $location) {
 		$location.path('/login');
 	}
 }
-
 LogoutController.$inject = ['$scope', '$cookieStore', '$location'];
 
 function ProjectsController($scope) {
 	$scope.projects = [
-		{'name': 'MI-NUR', 'numberOfMembers': 4, 'numberOfTasks': 15},
-		{'name': 'MI-PAA', 'numberOfMembers': 1, 'numberOfTasks': 3}
+		{'name': 'MI-NUR', 'numberOfMembers': 4, 'numberOfTasks': 15, 'id': 1, showOptions: false},
+		{'name': 'MI-PAA', 'numberOfMembers': 1, 'numberOfTasks': 3, 'id': 2, showOptions: false}
 	];
 }
-
 ProjectsController.$inject = ['$scope'];
