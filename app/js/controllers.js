@@ -2,13 +2,14 @@
 
 /* Controllers */
 
-function LoginController($scope, $location) {
+function LoginController($scope, $location, $cookieStore) {
 	$scope.flashMessages = [];
 	$scope.email = '';
 	$scope.password = '';
 
 	$scope.login = function() {
 		if ($scope.email == 'example@example.com' && $scope.password == 'example') {
+			$cookieStore.put('loginHash', 123);
 			$location.path('/projects');
 		} else {
 			$scope._flashMessage('Invalid user or password');
@@ -21,7 +22,7 @@ function LoginController($scope, $location) {
 		}
 	}
 }
-LoginController.$inject = ['$scope', '$location'];
+LoginController.$inject = ['$scope', '$location', '$cookieStore'];
 
 function ProjectsController($scope) {
 
