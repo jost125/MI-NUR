@@ -5,5 +5,6 @@
 angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives']).
   config(['$routeProvider', function($routeProvider) {
     $routeProvider.when('/login', {templateUrl: 'partials/login.html', controller: LoginController});
+    $routeProvider.when('/projects', {templateUrl: 'partials/projects.html', controller: ProjectsController});
     $routeProvider.otherwise({redirectTo: '/login'});
   }]);

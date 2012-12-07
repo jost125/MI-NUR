@@ -1,6 +1,11 @@
-Issue tracker
-<form>
-	<input type="text">
-	<input type="password">
-	<button>Login</button>
-</form>
+<div class="container">
+	<form class="form-signin">
+		<h2 class="form-signin-heading">Issue tracker</h2>
+		<ul class="flashMessages" ng-show="flashMessages.length">
+			<li ng-repeat="flashMessage in flashMessages">{{ flashMessage }}</li>
+		</ul>
+		<input ng-model="email" type="text" placeholder="Email address">
+		<input ng-model="password" type="password" placeholder="Password">
+		<button class="btn btn-large btn-primary" ng-click="login()">Login</button>
+	</form>
+</div>

@@ -2,15 +2,16 @@
 
 /* jasmine specs for controllers go here */
 
-describe('LoginController', function(){
-  var loginController;
+describe('LoginController', function () {
+	var loginController;
+	var scope = {};
 
-  beforeEach(function(){
-    loginController = new LoginController();
-  });
+	beforeEach(function () {
+		loginController = new LoginController(scope);
+	});
 
+	it('should have no flash message', function () {
+		expect(scope.flashMessages.length).toBe(0);
+	});
 
-  it('should ....', function() {
-    //spec body
-  });
 });
