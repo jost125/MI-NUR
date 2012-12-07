@@ -8,11 +8,18 @@ angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives', 
 		$routeProvider.when('/projects', {templateUrl:'partials/projects.html', controller:ProjectsController});
 		$routeProvider.otherwise({redirectTo:'/login'});
 	}]).run(function ($rootScope, $cookieStore, $location) {
+		$rootScope.logged = false;
 		$rootScope.$on("$routeChangeStart", function (event, next, current) {
 			if ($cookieStore.get('loginHash') !== 123) {
+				$rootScope.logged = false;
 				if (next.templateUrl !== "partials/login.html") {
 					$location.path("/login");
 				}
+			} else {
+				if (next.templateUrl === "partials/login.html") {
+					$location.path("/projects");
+				}
+				$rootScope.logged = true;
 			}
 		});
 	});
