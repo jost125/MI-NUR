@@ -34,7 +34,10 @@ function LogoutController($scope, $cookieStore, $location) {
 LogoutController.$inject = ['$scope', '$cookieStore', '$location'];
 
 function ProjectsController($scope) {
-
+	$scope.projects = [
+		{'name': 'MI-NUR', 'numberOfMembers': 4, 'numberOfTasks': 15},
+		{'name': 'MI-PAA', 'numberOfMembers': 1, 'numberOfTasks': 3}
+	];
 }
 
 ProjectsController.$inject = ['$scope'];
