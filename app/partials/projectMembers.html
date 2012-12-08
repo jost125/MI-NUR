@@ -1,0 +1,31 @@
+<div class="container">
+	<h2>{{ project.name }}</h2>
+	<ul class="nav nav-tabs">
+		<li>
+			<a href="#/project/settings">Settings</a>
+		</li>
+		<li class="active">
+			<a href="#/project/members">Members</a>
+		</li>
+	</ul>
+	<div class="projectMembersTab">
+		<table class="table">
+			<tr>
+				<th>Name</th>
+				<th>Email</th>
+				<th>Role</th>
+			</tr>
+			<tr ng-repeat="member in members">
+				<td>{{ member.firstName }} {{ member.lastName }}</td>
+				<td>{{ member.email }}</td>
+				<td>{{ member.role }}</td>
+			</tr>
+		</table>
+		<hr>
+		<form class="form-inline invitePersonForm">
+			<label class="control-label">Invite person</label>
+			<input type="text" placeholder="Email address" ng-model="inviteEmail">
+			<button type="submit" class="btn" ng-click="invite()">Send invitation</button>
+		</form>
+	</div>
+</div>

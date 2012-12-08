@@ -60,3 +60,14 @@ function ProjectSettingsController($scope) {
 
 }
 ProjectSettingsController.$inject = ['$scope'];
+
+function ProjectMembersController($scope) {
+	$scope.project = {
+		'name': 'MI-NUR'
+	}
+
+	$scope.members = [
+		{'firstName': 'Jan', 'lastName': 'Machala', 'email': 'jan.machala@example.com', 'role': 'member'}
+	];
+}
+ProjectMembersController.$inject = ['$scope'];

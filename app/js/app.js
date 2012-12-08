@@ -7,6 +7,7 @@ angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives', 
 		$routeProvider.when('/login', {templateUrl:'partials/login.html', controller:LoginController});
 		$routeProvider.when('/projects', {templateUrl:'partials/projects.html', controller:ProjectsController});
 		$routeProvider.when('/project/settings', {templateUrl:'partials/projectSettings.html', controller:ProjectSettingsController});
+		$routeProvider.when('/project/members', {templateUrl:'partials/projectMembers.html', controller:ProjectMembersController});
 		$routeProvider.otherwise({redirectTo:'/login'});
 	}]).run(function ($rootScope, $cookieStore, $location) {
 		$rootScope.logged = false;

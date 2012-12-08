@@ -50,3 +50,7 @@ body {
 .projectDeleteConfirmForm label {
 	text-align: left !important;
 }
+
+.projectMembersTab .invitePersonForm label, .projectMembersTab .invitePersonForm input {
+	margin-right: 20px;
+}
