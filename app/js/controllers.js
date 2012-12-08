@@ -71,3 +71,8 @@ function ProjectMembersController($scope) {
 	];
 }
 ProjectMembersController.$inject = ['$scope'];
+
+function ProjectAddController($scope) {
+
+}
+ProjectAddController.$inject = ['$scope'];

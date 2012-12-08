@@ -54,3 +54,7 @@ body {
 .projectMembersTab .invitePersonForm label, .projectMembersTab .invitePersonForm input {
 	margin-right: 20px;
 }
+
+.projectCreationForm label {
+	text-align: left !important;
+}
