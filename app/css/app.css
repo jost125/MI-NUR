@@ -38,3 +38,15 @@ body {
 .projectOverview .projectOptions a {
 	margin-right: 20px;
 }
+
+.projectSettingsTab .projectSettingsForm label {
+	text-align: left;
+}
+
+.projectSettingsTab .projectDeleteForm label {
+	margin-right: 20px;
+}
+
+.projectDeleteConfirmForm label {
+	text-align: left !important;
+}

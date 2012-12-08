@@ -39,3 +39,24 @@ function ProjectsController($scope) {
 	];
 }
 ProjectsController.$inject = ['$scope'];
+
+function ProjectSettingsController($scope) {
+	$scope.project = {
+		'name': 'MI-NUR'
+	}
+
+	$scope.reallyWantToDelete = false;
+	$scope.showConfirmModal = false;
+
+	$scope.delete = function() {
+		if ($scope.reallyWantToDelete) {
+			$scope.showConfirmModal = true;
+		}
+	}
+
+	$scope.hideConfirm = function() {
+		$scope.showConfirmModal = false;
+	}
+
+}
+ProjectSettingsController.$inject = ['$scope'];
