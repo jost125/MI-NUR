@@ -27,15 +27,15 @@
 	<div class="row-fluid taskBoxes">
 		<div class="span4 taskBox">
 			<div class="boxHeader">Current</div>
-			<ul ui-sortable ng-model="currentTasks" class="tasks currentTasks">
-				<li ng-repeat="task in currentTasks" class="item">
+			<ul ng-model="currentTasks" class="tasks currentTasks">
+				<li ng-repeat="(index, task) in currentTasks" class="item" data-index="{{ index }}">
 					{{ task.name }}
 				</li>
 			</ul>
 		</div>
 		<div class="span4 taskBox">
 			<div class="boxHeader">Backlog</div>
-			<ul ui-sortable ng-model="backlogTasks" class="tasks backlogTasks">
+			<ul ng-model="backlogTasks" class="tasks backlogTasks">
 				<li ng-repeat="task in backlogTasks" class="item">
 					{{ task.name }}
 				</li>
@@ -43,7 +43,7 @@
 		</div>
 		<div class="span4 taskBox">
 			<div class="boxHeader">Icebox</div>
-			<ul ui-sortable ng-model="iceboxTasks" class="tasks iceboxTasks">
+			<ul ng-model="iceboxTasks" class="tasks iceboxTasks">
 				<li ng-repeat="task in iceboxTasks" class="item">
 					{{ task.name }}
 				</li>
@@ -51,3 +51,34 @@
 		</div>
 	</div>
 </div>
+
+<script>
+	$(function() {
+
+		var reindexModel = function() {
+			var taskListElement = angular.element(this);
+			var taskElement = taskListElement.find('li');
+
+			var indexes = [];
+			taskElement.each(function() {
+				indexes.push($(this).attr('data-index'));
+			});
+
+			var $scope = taskListElement.scope();
+
+			var reordered = [];
+			for (i in indexes) {
+				reordered.push($scope.currentTasks[indexes[i]]);
+			}
+
+			$scope.$apply(function() {
+				$scope.currentTasks = reordered;
+			});
+
+		}
+
+		$('.tasks').sortable({
+			'update': reindexModel
+		});
+	})
+</script>

@@ -101,7 +101,12 @@ function ProjectDetailController($scope) {
 		angular.element('.taskBox').height(viewHeight);
 	});
 
-	window.onresize = function(){
+	$scope.$watch('currentTasks', function(newValue, oldValue) {
+		console.log(newValue);
+		console.log(oldValue);
+	});
+
+	window.onresize = function() {
 		$scope.$apply();
 	}
 }
