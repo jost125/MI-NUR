@@ -2,7 +2,6 @@
 
 body {
 	padding-top: 40px;
-	padding-bottom: 40px;
 	background-color: #f5f5f5;
 }
 
@@ -57,4 +56,62 @@ body {
 
 .projectCreationForm label {
 	text-align: left !important;
+}
+
+.taskBox {
+	padding: 0px !important;
+}
+
+.taskBox .boxHeader {
+	padding-right: 8px;
+	padding-left: 8px;
+	padding-top: 4px;
+	padding-bottom: 4px;
+	background-color: #555555;
+	-webkit-border-top-left-radius: 5px;
+	-webkit-border-top-right-radius: 5px;
+	-moz-border-radius-topleft: 5px;
+	-moz-border-radius-topright: 5px;
+	border-top-right-radius: 5px;
+	border-top-left-radius: 5px;
+	color: #EEEEEE;
+	font-weight: bold;
+	border: 1px solid #040404;
+}
+
+.taskBox table tr td {
+	background-color: #fefefe;
+	padding-top: 4px;
+	padding-bottom: 4px;
+
+}
+
+.taskBox {
+	background-color: #f5f5f5;
+	-moz-box-shadow: 0 0 5px #888888;
+	-webkit-box-shadow: 0 0 5px #888888;
+	box-shadow: 0 0 5px #888888;
+	border-radius: 5px;
+	overflow: auto;
+}
+
+.tasks {
+	padding: 0;
+	margin: 0;
+}
+
+.item, .placeholder {
+	padding: 4px 8px 4px 8px;
+	margin: 0;
+	list-style: none;
+}
+
+.currentTasks li {
+	background-color: #FAF2CC;
+	border-bottom: 1px solid #EAE2BB;
+}
+
+.iceboxTasks li {
+	background-color: #BCE8F1;
+	border-bottom: 1px solid #ACD8E1;
 }

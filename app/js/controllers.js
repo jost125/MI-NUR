@@ -76,3 +76,33 @@ function ProjectAddController($scope) {
 
 }
 ProjectAddController.$inject = ['$scope'];
+
+function ProjectDetailController($scope) {
+	$scope.currentTasks = [
+		{'name': 'Complete prototype'},
+		{'name': 'Write backend for logging'},
+		{'name': 'Write essay'},
+		{'name': 'CSS are optimized for chrome'},
+		{'name': 'CSS are optimized for firefox'},
+		{'name': 'CSS are optimized for ie'},
+		{'name': 'Scrollbar are desiged in boxes'}
+	];
+
+	$scope.iceboxTasks = [
+		{'name': 'Design is resposive'}
+	];
+
+	$scope.getHeight = function() {
+		return $(window).height();
+	};
+
+	$scope.$watch($scope.getHeight, function(newValue, oldValue) {
+		var viewHeight = newValue - angular.element('.projectMenu').height() - angular.element('.mainMenu').height() - 40;
+		angular.element('.taskBox').height(viewHeight);
+	});
+
+	window.onresize = function(){
+		$scope.$apply();
+	}
+}
+ProjectDetailController.$inject = ['$scope'];

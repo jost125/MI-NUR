@@ -3,7 +3,7 @@
 <p><a href="#/project/add">+ Add new project</a></p>
 <table class="table projectOverview">
 	<tr ng-repeat="project in projects" ng-mouseover="project.showOptions = true" ng-mouseout="project.showOptions = false">
-		<td class="projectName">{{ project.name }}</td>
+		<td class="projectName"><a href="#/project/detail">{{ project.name }}</td>
 		<td ng-show="!project.showOptions">{{ project.numberOfMembers }} members</td>
 		<td ng-show="!project.showOptions">{{ project.numberOfTasks }} tasks</td>
 		<td ng-show="project.showOptions" colspan="2" class="projectOptions"><a href="#/project/settings">Settings</a> <a href="#/project/members">Members</a></td>
