@@ -17,7 +17,7 @@
 				</ul>
 			</div><!--/.nav-collapse -->
 			<form class="navbar-form pull-right">
-				<button type="submit" class="btn">+ Add task</button>
+				<button type="submit" class="btn" ng-click="showAddTask()">+ Add task</button>
 				<input type="text" class="span2" placeholder="Search">
 			</form>
 		</div>
@@ -27,7 +27,7 @@
 	<div class="row-fluid taskBoxes">
 		<div class="span4 taskBox">
 			<div class="boxHeader">Current</div>
-			<ul ng-model="currentTasks" class="tasks currentTasks">
+			<ul ui-sortable ng-model="currentTasks" class="tasks currentTasks">
 				<li ng-repeat="(index, task) in currentTasks" class="item" data-index="{{ index }}">
 					{{ task.name }}
 				</li>
@@ -36,7 +36,7 @@
 		<div class="span4 taskBox">
 			<div class="boxHeader">Backlog</div>
 			<ul ng-model="backlogTasks" class="tasks backlogTasks">
-				<li ng-repeat="task in backlogTasks" class="item">
+				<li ng-repeat="(index, task) in backlogTasks" class="item" data-index="{{ index }}">
 					{{ task.name }}
 				</li>
 			</ul>
@@ -44,7 +44,7 @@
 		<div class="span4 taskBox">
 			<div class="boxHeader">Icebox</div>
 			<ul ng-model="iceboxTasks" class="tasks iceboxTasks">
-				<li ng-repeat="task in iceboxTasks" class="item">
+				<li ng-repeat="(index, task) in iceboxTasks" class="item" data-index="{{ index }}">
 					{{ task.name }}
 				</li>
 			</ul>
@@ -52,33 +52,61 @@
 	</div>
 </div>
 
-<script>
-	$(function() {
+{{ showAddTaskModal }}
 
-		var reindexModel = function() {
-			var taskListElement = angular.element(this);
-			var taskElement = taskListElement.find('li');
-
-			var indexes = [];
-			taskElement.each(function() {
-				indexes.push($(this).attr('data-index'));
-			});
-
-			var $scope = taskListElement.scope();
-
-			var reordered = [];
-			for (i in indexes) {
-				reordered.push($scope.currentTasks[indexes[i]]);
-			}
-
-			$scope.$apply(function() {
-				$scope.currentTasks = reordered;
-			});
-
-		}
-
-		$('.tasks').sortable({
-			'update': reindexModel
-		});
-	})
-</script>
+<div class="modal" ng-show="showAddTaskModal" style="width: 850px; margin: -250px 0 0 -425px">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true" ng-click="hideAddTask()">&times;</button>
+		<h3>New task</h3>
+	</div>
+	<div class="modal-body container">
+		<form class="form-horizontal">
+				<div class="pull-left">
+					<div class="control-group">
+						<label class="control-label">Task name</label>
+						<div class="controls">
+							<input ng-model="task.name" type="text">
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">Task type</label>
+						<div class="controls">
+							<select ng-model="task.type">
+								<option ng-repeat="taskType in taskTypes">{{ taskType }}</option>
+							</select>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">Difficulty</label>
+						<div class="controls">
+							<select ng-model="task.difficulty">
+								<option ng-repeat="taskDifficulty in taskDifficulties">{{ taskDifficulty }}</option>
+							</select>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">Assignee</label>
+						<div class="controls">
+							<select ng-model="task.assignee">
+								<option ng-repeat="user in users">{{ user }}</option>
+							</select>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">Deadline</label>
+						<div class="controls">
+							<input ng-model="task.deadline" type="date" ui-date>
+						</div>
+					</div>
+				</div>
+				<div class="pull-left" style="padding-left: 40px">
+					<label>Comment</label>
+						<textarea ng-model="task.comment" style="width: 350px; height: 195px"></textarea>
+				</div>
+		</form>
+	</div>
+	<div class="modal-footer">
+		<a ng-click="addTask(task)" class="btn">Create task</a>
+		<a class="btn btn-primary" ng-click="confirmedDelete()">Delete</a>
+	</div>
+</div>

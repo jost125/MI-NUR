@@ -92,6 +92,34 @@ function ProjectDetailController($scope) {
 		{'name': 'Design is resposive'}
 	];
 
+	$scope.backlogTasks = [
+	];
+
+	$scope.taskDifficulties = [1, 2, 3, 5, 8, 13];
+
+	$scope.users = [
+		'Jan Machala'
+	];
+
+	$scope.taskTypes = [
+		'Issue'
+	];
+
+	$scope.showAddTaskModal = false;
+
+	$scope.showAddTask = function() {
+		$scope.showAddTaskModal = true;
+	}
+
+	$scope.hideAddTask = function() {
+		$scope.showAddTaskModal = false;
+	}
+
+	$scope.addTask = function(task) {
+		$scope.iceboxTasks.push({'name': task.name});
+		$scope.hideAddTask();
+	}
+
 	$scope.getHeight = function() {
 		return $(window).height();
 	};
@@ -103,7 +131,6 @@ function ProjectDetailController($scope) {
 
 	$scope.$watch('currentTasks', function(newValue, oldValue) {
 		console.log(newValue);
-		console.log(oldValue);
 	});
 
 	window.onresize = function() {
