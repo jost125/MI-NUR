@@ -78,22 +78,22 @@ function ProjectAddController($scope) {
 ProjectAddController.$inject = ['$scope'];
 
 function ProjectDetailController($scope) {
-	$scope.currentTasks = [
-		{'name': 'Complete prototype'},
-		{'name': 'Write backend for logging'},
-		{'name': 'Write essay'},
-		{'name': 'CSS are optimized for chrome'},
-		{'name': 'CSS are optimized for firefox'},
-		{'name': 'CSS are optimized for ie'},
-		{'name': 'Scrollbar are desiged in boxes'}
-	];
-
-	$scope.iceboxTasks = [
-		{'name': 'Design is resposive'}
-	];
-
-	$scope.backlogTasks = [
-	];
+	$scope.tasks = {
+		'current': [
+			{'name': 'Complete prototype'},
+			{'name': 'Write backend for logging'},
+			{'name': 'Write essay'},
+			{'name': 'CSS are optimized for chrome'},
+			{'name': 'CSS are optimized for firefox'},
+			{'name': 'CSS are optimized for ie'},
+			{'name': 'Scrollbar are desiged in boxes'}
+		],
+		'icebox': [
+			{'name': 'Design is resposive'}
+		],
+		'backlog': [
+		]
+	};
 
 	$scope.taskDifficulties = [1, 2, 3, 5, 8, 13];
 
@@ -116,7 +116,7 @@ function ProjectDetailController($scope) {
 	}
 
 	$scope.addTask = function(task) {
-		$scope.iceboxTasks.push({'name': task.name});
+		$scope.tasks.icebox.push({'name': task.name});
 		$scope.hideAddTask();
 	}
 
@@ -127,11 +127,13 @@ function ProjectDetailController($scope) {
 	$scope.$watch($scope.getHeight, function(newValue, oldValue) {
 		var viewHeight = newValue - angular.element('.projectMenu').height() - angular.element('.mainMenu').height() - 40;
 		angular.element('.taskBox').height(viewHeight);
+		angular.element('.tasks').height(viewHeight - 30);
 	});
 
-	$scope.$watch('currentTasks', function(newValue, oldValue) {
+	$scope.$watch('tasks', function(newValue, oldValue) {
 		console.log(newValue);
-	});
+		console.log(oldValue);
+	}, true);
 
 	window.onresize = function() {
 		$scope.$apply();

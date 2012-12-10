@@ -27,24 +27,24 @@
 	<div class="row-fluid taskBoxes">
 		<div class="span4 taskBox">
 			<div class="boxHeader">Current</div>
-			<ul ui-sortable ng-model="currentTasks" class="tasks currentTasks">
-				<li ng-repeat="(index, task) in currentTasks" class="item" data-index="{{ index }}">
+			<ul ui-multi-sortable ng-model="tasks" model-subset="current" class="tasks currentTasks">
+				<li ng-repeat="task in tasks.current" class="item">
 					{{ task.name }}
 				</li>
 			</ul>
 		</div>
 		<div class="span4 taskBox">
 			<div class="boxHeader">Backlog</div>
-			<ul ng-model="backlogTasks" class="tasks backlogTasks">
-				<li ng-repeat="(index, task) in backlogTasks" class="item" data-index="{{ index }}">
+			<ul ui-multi-sortable ng-model="tasks" model-subset="backlog" class="tasks backlogTasks">
+				<li ng-repeat="task in tasks.backlog" class="item">
 					{{ task.name }}
 				</li>
 			</ul>
 		</div>
 		<div class="span4 taskBox">
 			<div class="boxHeader">Icebox</div>
-			<ul ng-model="iceboxTasks" class="tasks iceboxTasks">
-				<li ng-repeat="(index, task) in iceboxTasks" class="item" data-index="{{ index }}">
+			<ul ui-multi-sortable ng-model="tasks" model-subset="icebox" class="tasks iceboxTasks">
+				<li ng-repeat="task in tasks.icebox" class="item">
 					{{ task.name }}
 				</li>
 			</ul>

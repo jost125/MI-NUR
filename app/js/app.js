@@ -27,3 +27,9 @@ angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives', 
 			}
 		});
 	});
+
+angular.module('ui.config', []).value('ui.config', {
+	sortable: {
+		connectWith: '.tasks'
+	}
+});
