@@ -106,16 +106,16 @@ function ProjectDetailController($scope) {
 		'done': [
 		],
 		'current': [
-			{'name': 'Complete prototype', 'type': 'Issue', assigneeInicials: null, nextState: 'Start', difficulty: 1},
-			{'name': 'Write backend for logging', 'type': 'Issue', assigneeInicials: null, nextState: 'Start', difficulty: 1},
-			{'name': 'Write essay', 'type': 'Issue', assigneeInicials: null, nextState: 'Start', difficulty: 1},
-			{'name': 'CSS are optimized for chrome', 'type': 'Issue', assigneeInicials: null, nextState: 'Start', difficulty: 1},
-			{'name': 'CSS are optimized for firefox', 'type': 'Issue', assigneeInicials: null, nextState: 'Start', difficulty: 1},
-			{'name': 'CSS are optimized for ie', 'type': 'Issue', assigneeInicials: null, nextState: 'Start', difficulty: 1},
-			{'name': 'Scrollbar are desiged in boxes', 'type': 'Bug', assigneeInicials: 'JM', nextState: 'Start', difficulty: 13},
+			{'name': 'Complete prototype', 'type': 'Issue', assigneeInicials: null, nextState: 'Start', difficulty: 1, expand: false},
+			{'name': 'Write backend for logging', 'type': 'Issue', assigneeInicials: null, nextState: 'Start', difficulty: 1, expand: false},
+			{'name': 'Write essay', 'type': 'Issue', assigneeInicials: null, nextState: 'Start', difficulty: 1, expand: false},
+			{'name': 'CSS are optimized for chrome', 'type': 'Issue', assigneeInicials: null, nextState: 'Start', difficulty: 1, expand: false},
+			{'name': 'CSS are optimized for firefox', 'type': 'Issue', assigneeInicials: null, nextState: 'Start', difficulty: 1, expand: false},
+			{'name': 'CSS are optimized for ie', 'type': 'Issue', assigneeInicials: null, nextState: 'Start', difficulty: 1, expand: false},
+			{'name': 'Scrollbar are desiged in boxes', 'type': 'Bug', assigneeInicials: 'JM', nextState: 'Start', difficulty: 13, expand: false}
 		],
 		'icebox': [
-			{'name': 'Design is resposive', 'type': 'Issue', assigneeInicials: 'JM', nextState: 'Start', difficulty: 1}
+			{'name': 'Design is resposive', 'type': 'Issue', assigneeInicials: 'JM', nextState: 'Start', difficulty: 1, expand: false}
 		],
 		'backlog': [
 		]
@@ -175,6 +175,12 @@ function ProjectDetailController($scope) {
 
 	$scope.showMywork = function() {
 		$scope.boxes.mywork.show = !$scope.boxes.mywork.show;
+	}
+
+	$scope.toggleTask = function(index, type, $event) {
+		if (type === 'current') {
+			$scope.tasks.current[index].expand = !$scope.tasks.current[index].expand;
+		}
 	}
 
 	$scope.getHeight = function() {
