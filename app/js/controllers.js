@@ -78,6 +78,21 @@ function ProjectAddController($scope) {
 ProjectAddController.$inject = ['$scope'];
 
 function ProjectDetailController($scope) {
+
+	$scope.boxes = {
+		'current': {
+			'show': true
+		},
+		'backlog': {
+			'show': true
+		},
+		'icebox': {
+			'show': true
+		}
+	};
+
+	$scope.span = 4;
+
 	$scope.tasks = {
 		'current': [
 			{'name': 'Complete prototype'},
@@ -120,6 +135,18 @@ function ProjectDetailController($scope) {
 		$scope.hideAddTask();
 	}
 
+	$scope.showCurrent = function() {
+		$scope.boxes.current.show = !$scope.boxes.current.show;
+	}
+
+	$scope.showBacklog = function() {
+		$scope.boxes.backlog.show = !$scope.boxes.backlog.show;
+	}
+
+	$scope.showIcebox = function() {
+		$scope.boxes.icebox.show = !$scope.boxes.icebox.show;
+	}
+
 	$scope.getHeight = function() {
 		return $(window).height();
 	};
@@ -133,6 +160,22 @@ function ProjectDetailController($scope) {
 	$scope.$watch('tasks', function(newValue, oldValue) {
 		console.log(newValue);
 		console.log(oldValue);
+	}, true);
+
+	$scope.$watch('boxes', function(newValue, oldValue) {
+		var shown = 0;
+		for (var boxName in $scope.boxes) {
+			if ($scope.boxes[boxName].show === true) {
+				if (shown === 0) {
+					angular.element('.' + boxName + 'Box').css('margin-left', 0);
+				} else {
+					angular.element('.' + boxName + 'Box').css('margin-left', 34);
+				}
+				shown++;
+			} else {
+			}
+		}
+		$scope.span = shown >= 3 ? 4 : 12 / shown;
 	}, true);
 
 	window.onresize = function() {

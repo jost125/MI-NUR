@@ -9,9 +9,9 @@
 			<div class="nav-collapse collapse">
 				<ul class="nav">
 					<li><a href="">Done</a></li>
-					<li><a href="" class="active">Current</a></li>
-					<li><a href="" class="active">Backlog</a></li>
-					<li><a href="" class="active">Icebox</a></li>
+					<li><a href="" class="active" ng-click="showCurrent()">Current</a></li>
+					<li><a href="" class="active" ng-click="showBacklog()">Backlog</a></li>
+					<li><a href="" class="active" ng-click="showIcebox()">Icebox</a></li>
 					<li><a href="">Deadlines</a></li>
 					<li><a href="">MyWork</a></li>
 				</ul>
@@ -25,7 +25,7 @@
 </div>
 <div class="container-fluid">
 	<div class="row-fluid taskBoxes">
-		<div class="span4 taskBox">
+		<div class="span{{ span }} taskBox currentBox" ng-show="boxes.current.show">
 			<div class="boxHeader">Current</div>
 			<ul ui-multi-sortable ng-model="tasks" model-subset="current" class="tasks currentTasks">
 				<li ng-repeat="task in tasks.current" class="item">
@@ -33,7 +33,7 @@
 				</li>
 			</ul>
 		</div>
-		<div class="span4 taskBox">
+		<div class="span{{ span }} taskBox backlogBox" ng-show="boxes.backlog.show">
 			<div class="boxHeader">Backlog</div>
 			<ul ui-multi-sortable ng-model="tasks" model-subset="backlog" class="tasks backlogTasks">
 				<li ng-repeat="task in tasks.backlog" class="item">
@@ -41,7 +41,7 @@
 				</li>
 			</ul>
 		</div>
-		<div class="span4 taskBox">
+		<div class="span{{ span }} taskBox iceboxBox" ng-show="boxes.icebox.show">
 			<div class="boxHeader">Icebox</div>
 			<ul ui-multi-sortable ng-model="tasks" model-subset="icebox" class="tasks iceboxTasks">
 				<li ng-repeat="task in tasks.icebox" class="item">
@@ -51,8 +51,6 @@
 		</div>
 	</div>
 </div>
-
-{{ showAddTaskModal }}
 
 <div class="modal" ng-show="showAddTaskModal" style="width: 850px; margin: -250px 0 0 -425px">
 	<div class="modal-header">
