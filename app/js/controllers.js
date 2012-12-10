@@ -80,6 +80,9 @@ ProjectAddController.$inject = ['$scope'];
 function ProjectDetailController($scope) {
 
 	$scope.boxes = {
+		'done': {
+			'show': false
+		},
 		'current': {
 			'show': true
 		},
@@ -88,12 +91,20 @@ function ProjectDetailController($scope) {
 		},
 		'icebox': {
 			'show': true
+		},
+		'deadlines': {
+			'show': false
+		},
+		'mywork': {
+			'show': false
 		}
 	};
 
 	$scope.span = 4;
 
 	$scope.tasks = {
+		'done': [
+		],
 		'current': [
 			{'name': 'Complete prototype'},
 			{'name': 'Write backend for logging'},
@@ -135,6 +146,10 @@ function ProjectDetailController($scope) {
 		$scope.hideAddTask();
 	}
 
+	$scope.showDone = function() {
+		$scope.boxes.done.show = !$scope.boxes.done.show;
+	}
+
 	$scope.showCurrent = function() {
 		$scope.boxes.current.show = !$scope.boxes.current.show;
 	}
@@ -145,6 +160,14 @@ function ProjectDetailController($scope) {
 
 	$scope.showIcebox = function() {
 		$scope.boxes.icebox.show = !$scope.boxes.icebox.show;
+	}
+
+	$scope.showDeadlines = function() {
+		$scope.boxes.deadlines.show = !$scope.boxes.deadlines.show;
+	}
+
+	$scope.showMywork = function() {
+		$scope.boxes.mywork.show = !$scope.boxes.mywork.show;
 	}
 
 	$scope.getHeight = function() {

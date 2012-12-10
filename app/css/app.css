@@ -115,3 +115,7 @@ body {
 	background-color: #BCE8F1;
 	border-bottom: 1px solid #ACD8E1;
 }
+
+.projectMenu .active {
+	font-weight: bold;
+}
