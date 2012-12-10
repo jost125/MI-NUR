@@ -29,9 +29,12 @@
 			<div class="boxHeader">Current</div>
 			<ul ui-multi-sortable ng-model="tasks" model-subset="current" class="tasks currentTasks">
 				<li ng-repeat="task in tasks.current" class="item undone" ng-class="{Issue:'issue', Bug:'bug'}[task.type]">
-					<div style="width: auto">
+					<div style="auto">
 						{{ task.name }}
 						<a class="assigne-inicials" href="#/mywork:{{ task.assigneeInicials | lowercase }}">{{ task.assigneeInicials }}</a>
+					</div>
+					<div class="pull-right" style="width: 11px; margin-top: -20px;">
+						{{ task.difficulty }}
 					</div>
 					<div class="btn-group pull-right" style="width: 70px; top: -22px;">
 						<button class="btn btn-mini">{{ task.nextState }}</button>

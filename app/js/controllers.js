@@ -112,8 +112,7 @@ function ProjectDetailController($scope) {
 			{'name': 'CSS are optimized for chrome', 'type': 'Issue', assigneeInicials: null, nextState: 'Start', difficulty: 1},
 			{'name': 'CSS are optimized for firefox', 'type': 'Issue', assigneeInicials: null, nextState: 'Start', difficulty: 1},
 			{'name': 'CSS are optimized for ie', 'type': 'Issue', assigneeInicials: null, nextState: 'Start', difficulty: 1},
-			{'name': 'Scrollbar are desiged in boxes', 'type': 'Bug', assigneeInicials: 'JM', nextState: 'Start', difficulty: 1},
-			{'name': 'Fix bug with header on load', 'type': 'Bug', assigneeInicials: 'JM', nextState: 'Start', difficulty: 1}
+			{'name': 'Scrollbar are desiged in boxes', 'type': 'Bug', assigneeInicials: 'JM', nextState: 'Start', difficulty: 13},
 		],
 		'icebox': [
 			{'name': 'Design is resposive', 'type': 'Issue', assigneeInicials: 'JM', nextState: 'Start', difficulty: 1}
