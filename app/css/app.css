@@ -111,6 +111,19 @@ body {
 	border-bottom: 1px solid #EAE2BB;
 }
 
+.currentTasks > li.expanded {
+	background-color: #F5F7DD;
+	border-bottom: 1px solid #EAE2BB;
+}
+
+.currentTasks .taskEditForm {
+	border-bottom: #EAE2BB 1px solid;
+}
+
+.currentTasks .comments {
+	background-color: #FFFFEE;
+}
+
 .iceboxTasks > li {
 	background-color: #BCE8F1;
 	border-bottom: 1px solid #ACD8E1;
@@ -140,4 +153,47 @@ body {
 
 .taskType.issue {
 	background-image: url('../img/issue.png');
+}
+
+.taskEditForm {
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+.taskEditForm label {
+	width: 100px !important;
+	text-align: left !important;
+}
+
+.taskEditForm .controls {
+	margin-left: 120px !important;
+}
+
+.taskEditForm .control-group {
+	margin-bottom: 5px !important;
+}
+
+.taskDeleteForm label {
+	margin-right: 20px;
+}
+
+.commentsHeader {
+	font-weight: bold;
+}
+
+.comment {
+	padding: 10px 15px;
+	border-bottom: 1px solid #FAF2CC;
+}
+
+.commentText {
+	font-size: 80%;
+}
+
+.comment.replay textarea {
+	width: 100%;
+}
+
+.comment.replay div {
+	padding-right: 15px;
 }

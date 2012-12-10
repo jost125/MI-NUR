@@ -111,7 +111,16 @@ function ProjectDetailController($scope) {
 			{'name': 'Complete prototype', 'type': 'Issue', assigneeInicials: null, nextState: 'Start', difficulty: 1, expand: false, id: 1},
 			{'name': 'Write backend for logging', 'type': 'Issue', assigneeInicials: null, nextState: 'Start', difficulty: 1, expand: false, id: 2},
 			{'name': 'Write essay', 'type': 'Issue', assigneeInicials: null, nextState: 'Start', difficulty: 1, expand: false, id: 3},
-			{'name': 'CSS are optimized for chrome', 'type': 'Issue', assigneeInicials: null, nextState: 'Start', difficulty: 1, expand: false, id: 4},
+			{'name': 'CSS are optimized for chrome', 'type': 'Issue', assigneeInicials: null, nextState: 'Start', difficulty: 1, expand: false, id: 4, comments: [
+				{
+					text: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.',
+					author: 'Jan Machala'
+				},
+				{
+					text: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.',
+					author: 'Jan Machala'
+				}
+			]},
 			{'name': 'CSS are optimized for firefox', 'type': 'Issue', assigneeInicials: null, nextState: 'Start', difficulty: 1, expand: false, id: 5},
 			{'name': 'CSS are optimized for ie', 'type': 'Issue', assigneeInicials: null, nextState: 'Start', difficulty: 1, expand: false, id: 6},
 			{'name': 'Scrollbar are desiged in boxes', 'type': 'Bug', assigneeInicials: 'JM', nextState: 'Start', difficulty: 13, expand: false, id: 7}
