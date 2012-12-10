@@ -106,16 +106,17 @@ function ProjectDetailController($scope) {
 		'done': [
 		],
 		'current': [
-			{'name': 'Complete prototype'},
-			{'name': 'Write backend for logging'},
-			{'name': 'Write essay'},
-			{'name': 'CSS are optimized for chrome'},
-			{'name': 'CSS are optimized for firefox'},
-			{'name': 'CSS are optimized for ie'},
-			{'name': 'Scrollbar are desiged in boxes'}
+			{'name': 'Complete prototype', 'type': 'Issue', assigneeInicials: null, nextState: 'Start'},
+			{'name': 'Write backend for logging', 'type': 'Issue', assigneeInicials: null, nextState: 'Start'},
+			{'name': 'Write essay', 'type': 'Issue', assigneeInicials: null, nextState: 'Start'},
+			{'name': 'CSS are optimized for chrome', 'type': 'Issue', assigneeInicials: null, nextState: 'Start'},
+			{'name': 'CSS are optimized for firefox', 'type': 'Issue', assigneeInicials: null, nextState: 'Start'},
+			{'name': 'CSS are optimized for ie', 'type': 'Issue', assigneeInicials: null, nextState: 'Start'},
+			{'name': 'Scrollbar are desiged in boxes', 'type': 'Bug', assigneeInicials: 'JM', nextState: 'Start'},
+			{'name': 'Scrollbar are desiged in boxes asd asdkhja sdshd aůsdh aůsd akdsna bdsab dsb ajldbs ajshdb lajdbsljab djab dlabdaldsůsjfn asdfnůa sf', 'type': 'Bug', assigneeInicials: 'JM', nextState: 'Start'}
 		],
 		'icebox': [
-			{'name': 'Design is resposive'}
+			{'name': 'Design is resposive', 'type': 'Issue', assigneeInicials: 'JM', nextState: 'Start'}
 		],
 		'backlog': [
 		]
@@ -129,6 +130,12 @@ function ProjectDetailController($scope) {
 
 	$scope.taskTypes = [
 		'Issue'
+	];
+
+	$scope.nextTaskStates = [
+		'Start',
+		'Finish',
+		'Done'
 	];
 
 	$scope.showAddTaskModal = false;

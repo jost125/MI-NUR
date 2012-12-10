@@ -100,18 +100,18 @@ body {
 	margin: 0;
 }
 
-.item, .placeholder {
+.tasks > .item, .tasks > .placeholder {
 	padding: 4px 8px 4px 8px;
 	margin: 0;
 	list-style: none;
 }
 
-.currentTasks li {
+.currentTasks > li {
 	background-color: #FAF2CC;
 	border-bottom: 1px solid #EAE2BB;
 }
 
-.iceboxTasks li {
+.iceboxTasks > li {
 	background-color: #BCE8F1;
 	border-bottom: 1px solid #ACD8E1;
 }
