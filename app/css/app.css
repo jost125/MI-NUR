@@ -119,3 +119,20 @@ body {
 .projectMenu .active {
 	font-weight: bold;
 }
+
+.taskType {
+	width: 14px;
+	height: 14px;
+	display: inline-block;
+	margin-top: 1px;
+	line-height: 14px;
+	vertical-align: text-top;
+}
+
+.taskType.bug {
+	background-image: url('../img/bug.png');
+}
+
+.taskType.issue {
+	background-image: url('../img/issue.png');
+}
