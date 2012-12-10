@@ -150,7 +150,7 @@ function ProjectDetailController($scope) {
 	$scope.addTask = function(task) {
 		$scope.tasks.icebox.push({'name': task.name});
 		$scope.hideAddTask();
-		$scope.showIcebox();
+		$scope.boxes.icebox.show = true;
 	}
 
 	$scope.showDone = function() {
