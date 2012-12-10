@@ -28,8 +28,8 @@
 		<div class="span{{ span }} taskBox currentBox" ng-show="boxes.current.show">
 			<div class="boxHeader">Current</div>
 			<ul ui-multi-sortable ng-model="tasks" model-subset="current" class="tasks currentTasks">
-				<li ng-repeat="task in tasks.current" class="item" ng-class="{Issue:'issue', Bug:'bug'}[task.type]">
-					<div style="width: 320px">
+				<li ng-repeat="task in tasks.current" class="item undone" ng-class="{Issue:'issue', Bug:'bug'}[task.type]">
+					<div style="width: auto">
 						{{ task.name }}
 						<a class="assigne-inicials" href="#/mywork:{{ task.assigneeInicials | lowercase }}">{{ task.assigneeInicials }}</a>
 					</div>

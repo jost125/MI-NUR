@@ -106,17 +106,17 @@ function ProjectDetailController($scope) {
 		'done': [
 		],
 		'current': [
-			{'name': 'Complete prototype', 'type': 'Issue', assigneeInicials: null, nextState: 'Start'},
-			{'name': 'Write backend for logging', 'type': 'Issue', assigneeInicials: null, nextState: 'Start'},
-			{'name': 'Write essay', 'type': 'Issue', assigneeInicials: null, nextState: 'Start'},
-			{'name': 'CSS are optimized for chrome', 'type': 'Issue', assigneeInicials: null, nextState: 'Start'},
-			{'name': 'CSS are optimized for firefox', 'type': 'Issue', assigneeInicials: null, nextState: 'Start'},
-			{'name': 'CSS are optimized for ie', 'type': 'Issue', assigneeInicials: null, nextState: 'Start'},
-			{'name': 'Scrollbar are desiged in boxes', 'type': 'Bug', assigneeInicials: 'JM', nextState: 'Start'},
-			{'name': 'Scrollbar are desiged in boxes asd asdkhja sdshd aůsdh aůsd akdsna bdsab dsb ajldbs ajshdb lajdbsljab djab dlabdaldsůsjfn asdfnůa sf', 'type': 'Bug', assigneeInicials: 'JM', nextState: 'Start'}
+			{'name': 'Complete prototype', 'type': 'Issue', assigneeInicials: null, nextState: 'Start', difficulty: 1},
+			{'name': 'Write backend for logging', 'type': 'Issue', assigneeInicials: null, nextState: 'Start', difficulty: 1},
+			{'name': 'Write essay', 'type': 'Issue', assigneeInicials: null, nextState: 'Start', difficulty: 1},
+			{'name': 'CSS are optimized for chrome', 'type': 'Issue', assigneeInicials: null, nextState: 'Start', difficulty: 1},
+			{'name': 'CSS are optimized for firefox', 'type': 'Issue', assigneeInicials: null, nextState: 'Start', difficulty: 1},
+			{'name': 'CSS are optimized for ie', 'type': 'Issue', assigneeInicials: null, nextState: 'Start', difficulty: 1},
+			{'name': 'Scrollbar are desiged in boxes', 'type': 'Bug', assigneeInicials: 'JM', nextState: 'Start', difficulty: 1},
+			{'name': 'Fix bug with header on load', 'type': 'Bug', assigneeInicials: 'JM', nextState: 'Start', difficulty: 1}
 		],
 		'icebox': [
-			{'name': 'Design is resposive', 'type': 'Issue', assigneeInicials: 'JM', nextState: 'Start'}
+			{'name': 'Design is resposive', 'type': 'Issue', assigneeInicials: 'JM', nextState: 'Start', difficulty: 1}
 		],
 		'backlog': [
 		]
@@ -151,6 +151,7 @@ function ProjectDetailController($scope) {
 	$scope.addTask = function(task) {
 		$scope.tasks.icebox.push({'name': task.name});
 		$scope.hideAddTask();
+		$scope.showIcebox();
 	}
 
 	$scope.showDone = function() {
@@ -184,7 +185,6 @@ function ProjectDetailController($scope) {
 	$scope.$watch($scope.getHeight, function(newValue, oldValue) {
 		var viewHeight = newValue - angular.element('.projectMenu').height() - angular.element('.mainMenu').height() - 40;
 		angular.element('.taskBox').height(viewHeight);
-		angular.element('.tasks').height(viewHeight - 30);
 	});
 
 	$scope.$watch('tasks', function(newValue, oldValue) {
