@@ -30,7 +30,7 @@
 			<ul ui-multi-sortable ng-model="tasks" model-subset="current" class="tasks currentTasks">
 				<li ng-repeat="(index, task) in tasks.current" class="item undone">
 					<div style="width: auto">
-						<i ng-class="{true:'icon-chevron-down', false:'icon-chevron-right'}[task.expand]" ng-click="toggleTask(index, 'current', $event)"></i>
+						<i ng-class="{true:'icon-chevron-down', false:'icon-chevron-right'}[task.expand]" ng-click="toggleTask(index, 'current')"></i>
 						<span class="taskType" ng-class="{Issue:'issue', Bug:'bug'}[task.type]"></span>
 						{{ task.name }}
 						<a class="assigne-inicials" href="#/mywork:{{ task.assigneeInicials | lowercase }}">{{ task.assigneeInicials }}</a>
@@ -65,7 +65,6 @@
 			<ul ui-multi-sortable ng-model="tasks" model-subset="icebox" class="tasks iceboxTasks">
 				<li ng-repeat="task in tasks.icebox" class="item">
 					{{ task.name }}
-					<a class="assigne-inicials" href="#/mywork:{{ task.assigneeInicials | lowercase }}">{{ task.assigneeInicials }}</a>
 				</li>
 			</ul>
 		</div>

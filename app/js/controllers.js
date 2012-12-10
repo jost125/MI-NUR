@@ -14,7 +14,7 @@ function LoginController($scope, $location, $cookieStore) {
 		} else {
 			$scope._flashMessage('Invalid user or password');
 		}
-	}
+	};
 
 	$scope._flashMessage = function(message) {
 		if ($scope.flashMessages.indexOf(message) === -1) {
@@ -43,7 +43,7 @@ ProjectsController.$inject = ['$scope'];
 function ProjectSettingsController($scope) {
 	$scope.project = {
 		'name': 'MI-NUR'
-	}
+	};
 
 	$scope.reallyWantToDelete = false;
 	$scope.showConfirmModal = false;
@@ -52,11 +52,11 @@ function ProjectSettingsController($scope) {
 		if ($scope.reallyWantToDelete) {
 			$scope.showConfirmModal = true;
 		}
-	}
+	};
 
 	$scope.hideConfirm = function() {
 		$scope.showConfirmModal = false;
-	}
+	};
 
 }
 ProjectSettingsController.$inject = ['$scope'];
@@ -64,7 +64,7 @@ ProjectSettingsController.$inject = ['$scope'];
 function ProjectMembersController($scope) {
 	$scope.project = {
 		'name': 'MI-NUR'
-	}
+	};
 
 	$scope.members = [
 		{'firstName': 'Jan', 'lastName': 'Machala', 'email': 'jan.machala@example.com', 'role': 'member'}
@@ -72,10 +72,10 @@ function ProjectMembersController($scope) {
 }
 ProjectMembersController.$inject = ['$scope'];
 
-function ProjectAddController($scope) {
+function ProjectAddController() {
 
 }
-ProjectAddController.$inject = ['$scope'];
+ProjectAddController.$inject = [];
 
 function ProjectDetailController($scope) {
 
@@ -102,22 +102,26 @@ function ProjectDetailController($scope) {
 
 	$scope.span = 4;
 
+	$scope.currentIteration = 3;
+
 	$scope.tasks = {
 		'done': [
 		],
 		'current': [
-			{'name': 'Complete prototype', 'type': 'Issue', assigneeInicials: null, nextState: 'Start', difficulty: 1, expand: false},
-			{'name': 'Write backend for logging', 'type': 'Issue', assigneeInicials: null, nextState: 'Start', difficulty: 1, expand: false},
-			{'name': 'Write essay', 'type': 'Issue', assigneeInicials: null, nextState: 'Start', difficulty: 1, expand: false},
-			{'name': 'CSS are optimized for chrome', 'type': 'Issue', assigneeInicials: null, nextState: 'Start', difficulty: 1, expand: false},
-			{'name': 'CSS are optimized for firefox', 'type': 'Issue', assigneeInicials: null, nextState: 'Start', difficulty: 1, expand: false},
-			{'name': 'CSS are optimized for ie', 'type': 'Issue', assigneeInicials: null, nextState: 'Start', difficulty: 1, expand: false},
-			{'name': 'Scrollbar are desiged in boxes', 'type': 'Bug', assigneeInicials: 'JM', nextState: 'Start', difficulty: 13, expand: false}
+			{'name': 'Complete prototype', 'type': 'Issue', assigneeInicials: null, nextState: 'Start', difficulty: 1, expand: false, id: 1},
+			{'name': 'Write backend for logging', 'type': 'Issue', assigneeInicials: null, nextState: 'Start', difficulty: 1, expand: false, id: 2},
+			{'name': 'Write essay', 'type': 'Issue', assigneeInicials: null, nextState: 'Start', difficulty: 1, expand: false, id: 3},
+			{'name': 'CSS are optimized for chrome', 'type': 'Issue', assigneeInicials: null, nextState: 'Start', difficulty: 1, expand: false, id: 4},
+			{'name': 'CSS are optimized for firefox', 'type': 'Issue', assigneeInicials: null, nextState: 'Start', difficulty: 1, expand: false, id: 5},
+			{'name': 'CSS are optimized for ie', 'type': 'Issue', assigneeInicials: null, nextState: 'Start', difficulty: 1, expand: false, id: 6},
+			{'name': 'Scrollbar are desiged in boxes', 'type': 'Bug', assigneeInicials: 'JM', nextState: 'Start', difficulty: 13, expand: false, id: 7}
 		],
 		'icebox': [
-			{'name': 'Design is resposive', 'type': 'Issue', assigneeInicials: 'JM', nextState: 'Start', difficulty: 1, expand: false}
+			{'name': 'Design is resposive', 'type': 'Issue', assigneeInicials: 'JM', nextState: 'Start', difficulty: 1, expand: false, id: 8}
 		],
 		'backlog': [
+			{'name': 'CSS are optimized for ie', 'type': 'Issue', assigneeInicials: null, nextState: 'Start', difficulty: 1, expand: false, id: 9},
+			{'name': 'Scrollbar are desiged in boxes', 'type': 'Bug', assigneeInicials: 'JM', nextState: 'Start', difficulty: 13, expand: false, id: 10}
 		]
 	};
 
@@ -141,47 +145,47 @@ function ProjectDetailController($scope) {
 
 	$scope.showAddTask = function() {
 		$scope.showAddTaskModal = true;
-	}
+	};
 
 	$scope.hideAddTask = function() {
 		$scope.showAddTaskModal = false;
-	}
+	};
 
 	$scope.addTask = function(task) {
 		$scope.tasks.icebox.push({'name': task.name});
 		$scope.hideAddTask();
 		$scope.boxes.icebox.show = true;
-	}
+	};
 
 	$scope.showDone = function() {
 		$scope.boxes.done.show = !$scope.boxes.done.show;
-	}
+	};
 
 	$scope.showCurrent = function() {
 		$scope.boxes.current.show = !$scope.boxes.current.show;
-	}
+	};
 
 	$scope.showBacklog = function() {
 		$scope.boxes.backlog.show = !$scope.boxes.backlog.show;
-	}
+	};
 
 	$scope.showIcebox = function() {
 		$scope.boxes.icebox.show = !$scope.boxes.icebox.show;
-	}
+	};
 
 	$scope.showDeadlines = function() {
 		$scope.boxes.deadlines.show = !$scope.boxes.deadlines.show;
-	}
+	};
 
 	$scope.showMywork = function() {
 		$scope.boxes.mywork.show = !$scope.boxes.mywork.show;
-	}
+	};
 
-	$scope.toggleTask = function(index, type, $event) {
+	$scope.toggleTask = function(index, type) {
 		if (type === 'current') {
 			$scope.tasks.current[index].expand = !$scope.tasks.current[index].expand;
 		}
-	}
+	};
 
 	$scope.getHeight = function() {
 		return $(window).height();
@@ -192,9 +196,9 @@ function ProjectDetailController($scope) {
 		angular.element('.taskBox').height(viewHeight);
 	});
 
-	$scope.$watch('tasks', function(newValue, oldValue) {
-		console.log(newValue);
-		console.log(oldValue);
+	$scope.$watch('tasks', function(newTasks, oldTasks) {
+		console.log(newTasks);
+		console.log(oldTasks);
 	}, true);
 
 	$scope.$watch('boxes', function(newValue, oldValue) {
