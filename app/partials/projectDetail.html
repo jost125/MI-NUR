@@ -77,11 +77,6 @@
 										<input ng-model="task.deadline" type="date" ui-date>
 									</div>
 								</div>
-								<div class="control-group">
-									<div class="controls">
-										<button class="btn">Save task</button>
-									</div>
-								</div>
 							</div>
 						</form>
 
@@ -89,7 +84,7 @@
 							<label class="checkbox">
 								<input type="checkbox" ng-model="reallyWantToDelete"> I really want to delete this task
 							</label>
-							<button type="submit" class="btn" ng-click="delete(reallyWantToDelete)">Delete task</button>
+							<button type="submit" class="btn" ng-click="deleteTask(reallyWantToDelete, index, 'current')">Delete task</button>
 						</form>
 
 						<p class="commentsHeader">Comments</p>

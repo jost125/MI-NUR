@@ -196,6 +196,16 @@ function ProjectDetailController($scope) {
 		}
 	};
 
+	$scope.deleteTask = function(reallyWantToDelete, index, type) {
+		if (!reallyWantToDelete) {
+			alert('If you want to delete this task, check the checkbox');
+			return;
+		}
+		if (type === 'current') {
+			$scope.tasks.current.splice(index, 1);
+		}
+	}
+
 	$scope.getHeight = function() {
 		return $(window).height();
 	};
