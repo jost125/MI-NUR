@@ -38,10 +38,10 @@
 							</span>
 							<a class="assigne-inicials" href="#/mywork:{{ task.assigneeInicials | lowercase }}">{{ task.assigneeInicials }}</a>
 						</div>
-						<div class="pull-right" style="width: 11px; display: inline-block;">
+						<div ng-show="!task.expand" class="pull-right" style="width: 11px; display: inline-block;">
 							{{ task.difficulty }}
 						</div>
-						<div class="btn-group pull-right" style="width: 70px; display: inline-block; margin-top: -2px;">
+						<div ng-show="!task.expand" class="btn-group pull-right" style="width: 70px; display: inline-block; margin-top: -2px;">
 							<button class="btn btn-mini">{{ task.nextState }}</button>
 							<button class="btn btn-mini dropdown-toggle" data-toggle="dropdown">
 								<span class="caret"></span>
@@ -61,6 +61,20 @@
 									<label class="control-label">Task name</label>
 									<div class="controls">
 										<input ng-model="task.name" type="text">
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">Difficulty</label>
+									<div class="controls">
+										<input ng-model="task.difficulty" type="text">
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">State</label>
+									<div class="controls">
+										<select ng-model="task.nextState">
+											<option ng-repeat="nextTaskState in nextTaskStates">{{ nextTaskState }}</option>
+										</select>
 									</div>
 								</div>
 								<div class="control-group">
