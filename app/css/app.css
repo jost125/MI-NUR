@@ -134,6 +134,14 @@ body {
 	border-bottom: 1px solid #E2DEDE;
 }
 
+.projectMenu {
+	padding-top: 40px;
+}
+
+.projectBody {
+	padding-top: 60px;
+}
+
 .projectMenu .active {
 	font-weight: bold;
 }
@@ -197,3 +205,4 @@ body {
 .comment.replay div {
 	padding-right: 15px;
 }
+

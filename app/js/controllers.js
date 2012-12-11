@@ -217,6 +217,12 @@ function ProjectDetailController($scope, $rootScope) {
 
 	$scope.search = function(phrase) {
 		$scope.boxes.search.show = phrase != '';
+		var searchBoxElement = angular.element('.searchBox');
+		if ($scope.boxes.search.show && searchBoxElement) {
+			searchBoxElement.show();
+			var position = searchBoxElement.position();
+			angular.element(window).scrollTo(position.left, position.top);
+		}
 	};
 
 	$scope.getAllTasks = function() {
@@ -264,11 +270,12 @@ function ProjectDetailController($scope, $rootScope) {
 				shown++;
 			}
 		}
-		console.log(shown);
+
 		angular.element('.taskBoxContainer').css('width', ((100 / shown) + '%'));
 		if (shown >= 3) {
 			angular.element('.taskBoxes').css('width', (100 + (shown - 3) * (100/3)) + '%');
 		}
+
 	}, true);
 
 	window.onresize = function() {
