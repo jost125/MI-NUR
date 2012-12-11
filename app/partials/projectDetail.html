@@ -96,8 +96,8 @@
 							<div class="comment replay">
 								<div>
 									<form>
-										<textarea></textarea>
-										<button class="btn">Add comment</button>
+										<textarea ng-model="commentText"></textarea>
+										<button class="btn" ng-click="addComment(index, 'current', commentText)">Add comment</button>
 									</form>
 								</div>
 							</div>

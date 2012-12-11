@@ -24,6 +24,7 @@ angular.module('myApp', ['myApp.filters', 'myApp.services', 'myApp.directives', 
 					$location.path("/projects");
 				}
 				$rootScope.logged = true;
+				$rootScope.userName = 'Jan Machala';
 			}
 		});
 	});

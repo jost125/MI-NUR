@@ -77,7 +77,7 @@ function ProjectAddController() {
 }
 ProjectAddController.$inject = [];
 
-function ProjectDetailController($scope) {
+function ProjectDetailController($scope, $rootScope) {
 
 	$scope.boxes = {
 		'done': {
@@ -206,6 +206,12 @@ function ProjectDetailController($scope) {
 		}
 	}
 
+	$scope.addComment = function(index, type, commentText) {
+		if (type === 'current') {
+			$scope.tasks.current[index].comments.push({text: commentText, author: $rootScope.userName});
+		}
+	}
+
 	$scope.getHeight = function() {
 		return $(window).height();
 	};
@@ -240,4 +246,4 @@ function ProjectDetailController($scope) {
 		$scope.$apply();
 	}
 }
-ProjectDetailController.$inject = ['$scope'];
+ProjectDetailController.$inject = ['$scope', '$rootScope'];
