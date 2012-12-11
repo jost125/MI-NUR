@@ -97,6 +97,9 @@ function ProjectDetailController($scope, $rootScope) {
 		},
 		'mywork': {
 			'show': false
+		},
+		'search': {
+			'show': false
 		}
 	};
 
@@ -204,12 +207,35 @@ function ProjectDetailController($scope, $rootScope) {
 		if (type === 'current') {
 			$scope.tasks.current.splice(index, 1);
 		}
-	}
+	};
 
 	$scope.addComment = function(index, type, commentText) {
 		if (type === 'current') {
 			$scope.tasks.current[index].comments.push({text: commentText, author: $rootScope.userName});
 		}
+	};
+
+	$scope.search = function(phrase) {
+		$scope.boxes.search.show = phrase != '';
+	};
+
+	$scope.getAllTasks = function() {
+		var allTasks = [];
+		var i;
+		for (i in $scope.tasks.backlog) {
+			allTasks.push($scope.tasks.backlog[i]);
+		}
+		for (i in $scope.tasks.current) {
+			allTasks.push($scope.tasks.current[i]);
+		}
+		for (i in $scope.tasks.done) {
+			allTasks.push($scope.tasks.done[i]);
+		}
+		for (i in $scope.tasks.icebox) {
+			allTasks.push($scope.tasks.icebox[i]);
+		}
+
+		return allTasks;
 	}
 
 	$scope.getHeight = function() {
@@ -236,10 +262,13 @@ function ProjectDetailController($scope, $rootScope) {
 					angular.element('.' + boxName + 'Box').css('margin-left', 34);
 				}
 				shown++;
-			} else {
 			}
 		}
-		$scope.span = shown >= 3 ? 4 : 12 / shown;
+		console.log(shown);
+		angular.element('.taskBoxContainer').css('width', ((100 / shown) + '%'));
+		if (shown >= 3) {
+			angular.element('.taskBoxes').css('width', (100 + (shown - 3) * (100/3)) + '%');
+		}
 	}, true);
 
 	window.onresize = function() {

@@ -18,124 +18,140 @@
 			</div>
 			<div class="navbar-form pull-right">
 				<button type="submit" class="btn" ng-click="showAddTask()">+ Add task</button>
-				<input type="text" class="span2" placeholder="Search">
+				<input type="text" class="span2" placeholder="Search" ng-model="phrase" ng-change="search(phrase)">
 			</div>
 		</div>
 	</div>
 </div>
 <div class="container-fluid">
 	<div class="row-fluid taskBoxes">
-		<div class="span{{ span }} taskBox currentBox" ng-show="boxes.current.show">
-			<div class="boxHeader">Current</div>
-			<ul ui-multi-sortable ng-model="tasks" model-subset="current" class="tasks currentTasks">
-				<li ng-repeat="(index, task) in tasks.current" class="item undone" ng-class="{expanded: task.expand}">
-					<div>
-						<div style="display: inline-block;">
-							<i ng-class="{true:'icon-chevron-down', false:'icon-chevron-right'}[task.expand]" ng-click="toggleTask(index, 'current')"></i>
-							<span class="taskType" ng-class="{Issue:'issue', Bug:'bug'}[task.type]"></span>
-							<span class="taskName">
-								{{ task.name }}
-							</span>
-							<a class="assigne-inicials" href="#/mywork:{{ task.assigneeInicials | lowercase }}">{{ task.assigneeInicials }}</a>
-						</div>
-						<div ng-show="!task.expand" class="pull-right" style="width: 11px; display: inline-block;">
-							{{ task.difficulty }}
-						</div>
-						<div ng-show="!task.expand" class="btn-group pull-right" style="width: 70px; display: inline-block; margin-top: -2px;">
-							<button class="btn btn-mini">{{ task.nextState }}</button>
-							<button class="btn btn-mini dropdown-toggle" data-toggle="dropdown">
-								<span class="caret"></span>
-							</button>
-							<ul class="dropdown-menu" style="min-width: 50px; padding-right: 10px; padding-left: 10px;">
-								<li ng-repeat="nextTaskState in nextTaskStates" ng-click="task.nextState = nextTaskState">
-									{{ nextTaskState }}
-								</li>
-							</ul>
-						</div>
-					</div>
-
-					<div ng-show="task.expand">
-						<form class="form-horizontal taskEditForm clearfix">
-							<div>
-								<div class="control-group">
-									<label class="control-label">Task name</label>
-									<div class="controls">
-										<input ng-model="task.name" type="text">
-									</div>
-								</div>
-								<div class="control-group">
-									<label class="control-label">Difficulty</label>
-									<div class="controls">
-										<input ng-model="task.difficulty" type="text">
-									</div>
-								</div>
-								<div class="control-group">
-									<label class="control-label">State</label>
-									<div class="controls">
-										<select ng-model="task.nextState">
-											<option ng-repeat="nextTaskState in nextTaskStates">{{ nextTaskState }}</option>
-										</select>
-									</div>
-								</div>
-								<div class="control-group">
-									<label class="control-label">Assignee</label>
-									<div class="controls">
-										<select ng-model="task.assignee">
-											<option ng-repeat="user in users">{{ user }}</option>
-										</select>
-									</div>
-								</div>
-								<div class="control-group">
-									<label class="control-label">Deadline</label>
-									<div class="controls">
-										<input ng-model="task.deadline" type="date" ui-date>
-									</div>
-								</div>
+		<div class="taskBoxContainer pull-left">
+			<div class="taskBox currentBox" ng-show="boxes.current.show">
+				<div class="boxHeader">Current</div>
+				<ul ui-multi-sortable ng-model="tasks" model-subset="current" class="tasks currentTasks">
+					<li ng-repeat="(index, task) in tasks.current" class="item undone" ng-class="{expanded: task.expand}">
+						<div>
+							<div style="display: inline-block;">
+								<i ng-class="{true:'icon-chevron-down', false:'icon-chevron-right'}[task.expand]" ng-click="toggleTask(index, 'current')"></i>
+								<span class="taskType" ng-class="{Issue:'issue', Bug:'bug'}[task.type]"></span>
+								<span class="taskName">
+									{{ task.name }}
+								</span>
+								<a class="assigne-inicials" href="#/mywork:{{ task.assigneeInicials | lowercase }}">{{ task.assigneeInicials }}</a>
 							</div>
-						</form>
-
-						<form class="form-inline taskDeleteForm">
-							<label class="checkbox">
-								<input type="checkbox" ng-model="reallyWantToDelete"> I really want to delete this task
-							</label>
-							<button type="submit" class="btn" ng-click="deleteTask(reallyWantToDelete, index, 'current')">Delete task</button>
-						</form>
-
-						<p class="commentsHeader">Comments</p>
-						<div class="comments">
-							<div ng-repeat="comment in task.comments" class="comment">
-								<p>{{ comment.author }}</p>
-								<p class="commentText">{{ comment.text }}</p>
+							<div ng-show="!task.expand" class="pull-right" style="width: 11px; display: inline-block;">
+								{{ task.difficulty }}
 							</div>
-							<div class="comment replay">
+							<div ng-show="!task.expand" class="btn-group pull-right" style="width: 70px; display: inline-block; margin-top: -2px;">
+								<button class="btn btn-mini">{{ task.nextState }}</button>
+								<button class="btn btn-mini dropdown-toggle" data-toggle="dropdown">
+									<span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu" style="min-width: 50px; padding-right: 10px; padding-left: 10px;">
+									<li ng-repeat="nextTaskState in nextTaskStates" ng-click="task.nextState = nextTaskState">
+										{{ nextTaskState }}
+									</li>
+								</ul>
+							</div>
+						</div>
+
+						<div ng-show="task.expand">
+							<form class="form-horizontal taskEditForm clearfix">
 								<div>
-									<form>
-										<textarea ng-model="commentText"></textarea>
-										<button class="btn" ng-click="addComment(index, 'current', commentText)">Add comment</button>
-									</form>
+									<div class="control-group">
+										<label class="control-label">Task name</label>
+										<div class="controls">
+											<input ng-model="task.name" type="text">
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">Difficulty</label>
+										<div class="controls">
+											<input ng-model="task.difficulty" type="text">
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">State</label>
+										<div class="controls">
+											<select ng-model="task.nextState">
+												<option ng-repeat="nextTaskState in nextTaskStates">{{ nextTaskState }}</option>
+											</select>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">Assignee</label>
+										<div class="controls">
+											<select ng-model="task.assignee">
+												<option ng-repeat="user in users">{{ user }}</option>
+											</select>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">Deadline</label>
+										<div class="controls">
+											<input ng-model="task.deadline" type="date" ui-date>
+										</div>
+									</div>
+								</div>
+							</form>
+
+							<form class="form-inline taskDeleteForm">
+								<label class="checkbox">
+									<input type="checkbox" ng-model="reallyWantToDelete"> I really want to delete this task
+								</label>
+								<button type="submit" class="btn" ng-click="deleteTask(reallyWantToDelete, index, 'current')">Delete task</button>
+							</form>
+
+							<p class="commentsHeader">Comments</p>
+							<div class="comments">
+								<div ng-repeat="comment in task.comments" class="comment">
+									<p>{{ comment.author }}</p>
+									<p class="commentText">{{ comment.text }}</p>
+								</div>
+								<div class="comment replay">
+									<div>
+										<form>
+											<textarea ng-model="commentText"></textarea>
+											<button class="btn" ng-click="addComment(index, 'current', commentText)">Add comment</button>
+										</form>
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
 
-				</li>
-			</ul>
+					</li>
+				</ul>
+			</div>
 		</div>
-		<div class="span{{ span }} taskBox backlogBox" ng-show="boxes.backlog.show">
-			<div class="boxHeader">Backlog</div>
-			<ul ui-multi-sortable ng-model="tasks" model-subset="backlog" class="tasks backlogTasks">
-				<li ng-repeat="task in tasks.backlog" class="item">
-					{{ task.name }}
-				</li>
-			</ul>
+		<div class="taskBoxContainer pull-left">
+			<div class="taskBox backlogBox" ng-show="boxes.backlog.show">
+				<div class="boxHeader">Backlog</div>
+				<ul ui-multi-sortable ng-model="tasks" model-subset="backlog" class="tasks backlogTasks">
+					<li ng-repeat="task in tasks.backlog" class="item">
+						{{ task.name }}
+					</li>
+				</ul>
+			</div>
 		</div>
-		<div class="span{{ span }} taskBox iceboxBox" ng-show="boxes.icebox.show">
-			<div class="boxHeader">Icebox</div>
-			<ul ui-multi-sortable ng-model="tasks" model-subset="icebox" class="tasks iceboxTasks">
-				<li ng-repeat="task in tasks.icebox" class="item">
-					{{ task.name }}
-				</li>
-			</ul>
+		<div class="taskBoxContainer pull-left">
+			<div class="taskBox iceboxBox" ng-show="boxes.icebox.show">
+				<div class="boxHeader">Icebox</div>
+				<ul ui-multi-sortable ng-model="tasks" model-subset="icebox" class="tasks iceboxTasks">
+					<li ng-repeat="task in tasks.icebox" class="item">
+						{{ task.name }}
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="taskBoxContainer pull-left">
+			<div class="taskBox searchBox" ng-show="boxes.search.show">
+				<div class="boxHeader">Search</div>
+				<ul class="tasks iceboxTasks">
+					<li ng-repeat="task in getAllTasks() | filter:phrase" class="item">
+						{{ task.name }}
+					</li>
+				</ul>
+			</div>
 		</div>
 	</div>
 </div>
