@@ -65,6 +65,14 @@
 										</div>
 									</div>
 									<div class="control-group">
+										<label class="control-label">Task type</label>
+										<div class="controls">
+											<select ng-model="task.type">
+												<option ng-repeat="taskType in taskTypes">{{ taskType }}</option>
+											</select>
+										</div>
+									</div>
+									<div class="control-group">
 										<label class="control-label">Difficulty</label>
 										<div class="controls">
 											<input ng-model="task.difficulty" type="text">

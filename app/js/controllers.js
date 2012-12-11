@@ -144,7 +144,8 @@ function ProjectDetailController($scope, $rootScope) {
 	];
 
 	$scope.taskTypes = [
-		'Issue'
+		'Issue',
+		'Bug'
 	];
 
 	$scope.nextTaskStates = [
