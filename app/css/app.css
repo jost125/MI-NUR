@@ -155,6 +155,23 @@ body {
 	border-bottom: 1px solid #ACD8E1;
 }
 
+.iceboxTasks > li.expanded {
+	background-color: #DDF8F5;
+	border-bottom: 1px solid #ACD8E1;
+}
+
+.iceboxTasks .taskEditForm {
+	border-bottom: #ACD8E1 1px solid;
+}
+
+.iceboxTasks .comments {
+	background-color: #EEFFFF;
+}
+
+.iceboxTasks .comment {
+	border-bottom: 1px solid #BCE8F1;
+}
+
 .backlogTasks > li {
 	background-color: #E2DEDE;
 	border-bottom: 1px solid #D2CECE;
