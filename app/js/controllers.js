@@ -141,11 +141,7 @@ function ProjectDetailController($scope, $rootScope) {
 			{'name': 'Write essay', 'type': 'Issue', assigneeInicials: null, assignee: null, nextAction: 'Start', state: 'New', difficulty: 1, expand: false, id: 3, comments: [], deadline: null, taskCategory: 'current'},
 			{'name': 'CSS are optimized for chrome', 'type': 'Issue', assigneeInicials: null, assignee: null, nextAction: 'Start', state: 'New', difficulty: 1, expand: false, id: 4, deadline: new Date(2012, 12, 12), taskCategory: 'current', comments: [
 				{
-					text: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.',
-					author: 'Jan Machala'
-				},
-				{
-					text: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.',
+					text: 'I have the same problem with PHP. Don\'t know if it\'s related, but whatever PHP script I open shows "Please wait..." on a grey background that won\'t go away. Hovering over the "Please wait"... shows the full path to the opened file in a tooltip. Opening js, css or textfiles within the same project works fine, just the PHP files are problematic.',
 					author: 'Jan Machala'
 				}
 			]},
