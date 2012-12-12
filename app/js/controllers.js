@@ -94,10 +94,17 @@ function ProjectMembersController($scope) {
 }
 ProjectMembersController.$inject = ['$scope'];
 
-function ProjectAddController() {
+function ProjectAddController($scope) {
 
+	$scope.project = {
+		name: null
+	}
+
+	$scope.save = function() {
+		alert('Project ' + $scope.project.name + ' was created.');
+	};
 }
-ProjectAddController.$inject = [];
+ProjectAddController.$inject = ['$scope'];
 
 function ProjectDetailController($scope, $rootScope) {
 
