@@ -30,7 +30,7 @@
 		<div class="taskBox doneBox" ng-show="boxes.done.show">
 			<div class="boxHeader">Done</div>
 			<ul class="tasks doneTasks">
-				<li ng-repeat="(index, task) in tasks.done" class="item" ng-class="{expanded: task.expand}">
+				<li ng-repeat="(index, task) in tasks.done" class="item" ng-class="{expanded: task.expand}" data-task-id="{{ task.id }}">
 					<div>
 						<div style="display: inline-block;">
 							<i ng-class="{true:'icon-chevron-down', false:'icon-chevron-right'}[task.expand]" ng-click="toggleTask(index, 'done')"></i>
@@ -126,7 +126,7 @@
 			<div class="taskBox currentBox" ng-show="boxes.current.show">
 				<div class="boxHeader">Current</div>
 				<ul ui-multi-sortable ng-model="tasks" model-subset="current" class="tasks currentTasks">
-					<li ng-repeat="(index, task) in tasks.current" class="item" ng-class="{expanded: task.expand, finished: task.state == 'Finished'}">
+					<li ng-repeat="(index, task) in tasks.current" class="item" ng-class="{expanded: task.expand, finished: task.state == 'Finished'}" data-task-id="{{ task.id }}">
 						<div>
 							<div style="display: inline-block;">
 								<i ng-class="{true:'icon-chevron-down', false:'icon-chevron-right'}[task.expand]" ng-click="toggleTask(index, 'current')"></i>
@@ -233,7 +233,7 @@
 			<div class="taskBox backlogBox" ng-show="boxes.backlog.show">
 				<div class="boxHeader">Backlog</div>
 				<ul ui-multi-sortable ng-model="tasks" model-subset="backlog" class="tasks backlogTasks">
-					<li ng-repeat="(index, task) in tasks.backlog" class="item" ng-class="{expanded: task.expand, finished: task.state == 'Finished'}">
+					<li ng-repeat="(index, task) in tasks.backlog" class="item" ng-class="{expanded: task.expand, finished: task.state == 'Finished'}" data-task-id="{{ task.id }}">
 						<div>
 							<div style="display: inline-block;">
 								<i ng-class="{true:'icon-chevron-down', false:'icon-chevron-right'}[task.expand]" ng-click="toggleTask(index, 'backlog')"></i>
@@ -339,7 +339,7 @@
 			<div class="taskBox iceboxBox" ng-show="boxes.icebox.show">
 				<div class="boxHeader">Icebox</div>
 				<ul ui-multi-sortable ng-model="tasks" model-subset="icebox" class="tasks iceboxTasks">
-					<li ng-repeat="(index, task) in tasks.icebox" class="item" ng-class="{expanded: task.expand, finished: task.state == 'Finished'}">
+					<li ng-repeat="(index, task) in tasks.icebox" class="item" ng-class="{expanded: task.expand, finished: task.state == 'Finished'}" data-task-id="{{ task.id }}">
 						<div>
 							<div style="display: inline-block;">
 								<i ng-class="{true:'icon-chevron-down', false:'icon-chevron-right'}[task.expand]" ng-click="toggleTask(index, 'icebox')"></i>
@@ -446,6 +446,7 @@
 				<div class="boxHeader">Deadlines</div>
 				<ul class="tasks deadlinesTasks">
 					<li ng-repeat="task in getAllDeadlines() | orderBy:deadline" class="item">
+						<i class="icon-share" ng-click="jumpToTask(task)"></i>
 						{{ task.name }}
 					</li>
 				</ul>
@@ -456,6 +457,7 @@
 				<div class="boxHeader">MyWork</div>
 				<ul class="tasks myworkTasks">
 					<li ng-repeat="task in getMyWork()" class="item">
+						<i class="icon-share" ng-click="jumpToTask(task)"></i>
 						{{ task.name }}
 					</li>
 				</ul>
@@ -466,6 +468,7 @@
 				<div class="boxHeader">Search</div>
 				<ul class="tasks searchTasks">
 					<li ng-repeat="task in getAllTasks() | filter:phrase" class="item">
+						<i class="icon-share" ng-click="jumpToTask(task)"></i>
 						{{ task.name }}
 					</li>
 				</ul>

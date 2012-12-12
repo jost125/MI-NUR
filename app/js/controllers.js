@@ -109,13 +109,13 @@ function ProjectDetailController($scope, $rootScope) {
 
 	$scope.tasks = {
 		'done': [
-			{'name': 'Complete lowfi prototype', 'type': 'Issue', assigneeInicials: null, assignee: null, nextAction: null, state: 'Finished', difficulty: 1, expand: false, id: 1, comments: [], deadline: null},
-			{'name': 'Complete hifi prototype', 'type': 'Issue', assigneeInicials: null, assignee: null, nextAction: null, state: 'Finished', difficulty: 1, expand: false, id: 1, comments: [], deadline: null}
+			{'name': 'Complete lowfi prototype', 'type': 'Issue', assigneeInicials: null, assignee: null, nextAction: null, state: 'Finished', difficulty: 1, expand: false, id: 1, comments: [], deadline: null, taskCategory: 'done'},
+			{'name': 'Complete hifi prototype', 'type': 'Issue', assigneeInicials: null, assignee: null, nextAction: null, state: 'Finished', difficulty: 1, expand: false, id: 11, comments: [], deadline: null, taskCategory: 'done'}
 		],
 		'current': [
-			{'name': 'Write backend for logging', 'type': 'Issue', assigneeInicials: null, assignee: null, nextAction: 'Start', state: 'New', difficulty: 1, expand: false, id: 2, comments: [], deadline: null},
-			{'name': 'Write essay', 'type': 'Issue', assigneeInicials: null, assignee: null, nextAction: 'Start', state: 'New', difficulty: 1, expand: false, id: 3, comments: [], deadline: null},
-			{'name': 'CSS are optimized for chrome', 'type': 'Issue', assigneeInicials: null, assignee: null, nextAction: 'Start', state: 'New', difficulty: 1, expand: false, id: 4, deadline: new Date(2012, 12, 12), comments: [
+			{'name': 'Write backend for logging', 'type': 'Issue', assigneeInicials: null, assignee: null, nextAction: 'Start', state: 'New', difficulty: 1, expand: false, id: 2, comments: [], deadline: null, taskCategory: 'current'},
+			{'name': 'Write essay', 'type': 'Issue', assigneeInicials: null, assignee: null, nextAction: 'Start', state: 'New', difficulty: 1, expand: false, id: 3, comments: [], deadline: null, taskCategory: 'current'},
+			{'name': 'CSS are optimized for chrome', 'type': 'Issue', assigneeInicials: null, assignee: null, nextAction: 'Start', state: 'New', difficulty: 1, expand: false, id: 4, deadline: new Date(2012, 12, 12), taskCategory: 'current', comments: [
 				{
 					text: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.',
 					author: 'Jan Machala'
@@ -125,16 +125,16 @@ function ProjectDetailController($scope, $rootScope) {
 					author: 'Jan Machala'
 				}
 			]},
-			{'name': 'CSS are optimized for firefox', 'type': 'Issue', assigneeInicials: null, assignee: null, nextAction: 'Start', state: 'New', difficulty: 1, expand: false, id: 5, comments: [], deadline: null},
-			{'name': 'CSS are optimized for ie', 'type': 'Issue', assigneeInicials: null, assignee: null, nextAction: 'Start', state: 'New', difficulty: 1, expand: false, id: 6, comments: [], deadline: null},
-			{'name': 'Scrollbar are desiged in boxes', 'type': 'Bug', assigneeInicials: 'JM', assignee: 'Jan Machala', nextAction: 'Start', state: 'New', difficulty: 13, expand: false, id: 7, comments: [], deadline: new Date(2012, 12, 20)}
+			{'name': 'CSS are optimized for firefox', 'type': 'Issue', assigneeInicials: null, assignee: null, nextAction: 'Start', state: 'New', difficulty: 1, expand: false, id: 5, comments: [], deadline: null, taskCategory: 'current'},
+			{'name': 'CSS are optimized for ie', 'type': 'Issue', assigneeInicials: null, assignee: null, nextAction: 'Start', state: 'New', difficulty: 1, expand: false, id: 6, comments: [], deadline: null, taskCategory: 'current'},
+			{'name': 'Scrollbar are desiged in boxes', 'type': 'Bug', assigneeInicials: 'JM', assignee: 'Jan Machala', nextAction: 'Start', state: 'New', difficulty: 13, expand: false, id: 7, comments: [], deadline: new Date(2012, 12, 20), taskCategory: 'current'}
 		],
 		'icebox': [
-			{'name': 'Design is resposive', 'type': 'Issue', assigneeInicials: 'JM', assignee: 'Jan Machala', nextAction: 'Start', state: 'New', difficulty: 1, expand: false, id: 8, comments: [], deadline: null}
+			{'name': 'Design is resposive', 'type': 'Issue', assigneeInicials: 'JM', assignee: 'Jan Machala', nextAction: 'Start', state: 'New', difficulty: 1, expand: false, id: 8, comments: [], deadline: null, taskCategory: 'icebox'}
 		],
 		'backlog': [
-			{'name': 'CSS are optimized for ie', 'type': 'Issue', assigneeInicials: null, assignee: null, nextAction: 'Start', state: 'New', difficulty: 1, expand: false, id: 9, comments: [], deadline: null},
-			{'name': 'Scrollbar are desiged in boxes', 'type': 'Bug', assigneeInicials: 'JM', assignee: 'Jan Machala', nextAction: 'Start', state: 'New', difficulty: 13, expand: false, id: 10, comments: [], deadline: null}
+			{'name': 'CSS are optimized for ie', 'type': 'Issue', assigneeInicials: null, assignee: null, nextAction: 'Start', state: 'New', difficulty: 1, expand: false, id: 9, comments: [], deadline: null, taskCategory: 'backlog'},
+			{'name': 'Scrollbar are desiged in boxes', 'type': 'Bug', assigneeInicials: 'JM', assignee: 'Jan Machala', nextAction: 'Start', state: 'New', difficulty: 13, expand: false, id: 10, comments: [], deadline: null, taskCategory: 'backlog'}
 		]
 	};
 
@@ -353,6 +353,11 @@ function ProjectDetailController($scope, $rootScope) {
 		return filteredTasks;
 	};
 
+	$scope.jumpToTask = function(task) {
+		$scope.boxes[task.taskCategory].show = true;
+		angular.element(window).scrollTo(angular.element('li[data-task-id=' + task.id + ']').position());
+	};
+
 	$scope.getHeight = function() {
 		return $(window).height();
 	};
@@ -372,6 +377,11 @@ function ProjectDetailController($scope, $rootScope) {
 		for (i in $scope.tasks.icebox) {
 			$scope.tasks.icebox[i].state = 'New';
 			$scope.tasks.icebox[i].nextAction = 'Start';
+		}
+		for (var taskCategory in $scope.tasks) {
+			for (i in $scope.tasks[taskCategory]) {
+				$scope.tasks[taskCategory][i].taskCategory = taskCategory;
+			}
 		}
 		console.log(oldTasks);
 	}, true);
