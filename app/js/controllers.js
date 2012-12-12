@@ -186,8 +186,6 @@ function ProjectDetailController($scope, $rootScope) {
 		if (comment) {
 			task.comments.push(comment);
 		}
-
-		console.log(task);
 		$scope.tasks.icebox.push(task);
 		$scope.hideAddTask();
 		$scope.boxes.icebox.show = true;
