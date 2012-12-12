@@ -34,8 +34,8 @@ LogoutController.$inject = ['$scope', '$cookieStore', '$location'];
 
 function ProjectsController($scope) {
 	$scope.projects = [
-		{'name': 'MI-NUR', 'numberOfMembers': 4, 'numberOfTasks': 15, 'id': 1, showOptions: false},
-		{'name': 'MI-PAA', 'numberOfMembers': 1, 'numberOfTasks': 3, 'id': 2, showOptions: false}
+		{'name': 'MI-NUR', 'numberOfMembers': 4, 'numberOfTasks': 15, 'id': 1, showOptions: false}
+//		{'name': 'MI-PAA', 'numberOfMembers': 1, 'numberOfTasks': 3, 'id': 2, showOptions: false}
 	];
 }
 ProjectsController.$inject = ['$scope'];
@@ -51,11 +51,17 @@ function ProjectSettingsController($scope) {
 	$scope.delete = function() {
 		if ($scope.reallyWantToDelete) {
 			$scope.showConfirmModal = true;
+		} else {
+			alert('Check first, that you really want to delete project ' + $scope.project.name + '.');
 		}
 	};
 
 	$scope.hideConfirm = function() {
 		$scope.showConfirmModal = false;
+	};
+
+	$scope.save = function() {
+		alert('Project ' + $scope.project.name + ' was saved');
 	};
 
 }
@@ -69,6 +75,10 @@ function ProjectMembersController($scope) {
 	$scope.members = [
 		{'firstName': 'Jan', 'lastName': 'Machala', 'email': 'jan.machala@example.com', 'role': 'member'}
 	];
+
+	$scope.invite = function() {
+		alert('Inivitation sent.');
+	}
 }
 ProjectMembersController.$inject = ['$scope'];
 
