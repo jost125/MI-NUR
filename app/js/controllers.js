@@ -40,11 +40,12 @@ function ProjectsController($scope) {
 }
 ProjectsController.$inject = ['$scope'];
 
-function ProjectSettingsController($scope) {
+function ProjectSettingsController($scope, $location) {
 	$scope.project = {
 		'name': 'MI-NUR'
 	};
 
+	$scope.retypedProjectName = '';
 	$scope.reallyWantToDelete = false;
 	$scope.showConfirmModal = false;
 
@@ -64,8 +65,19 @@ function ProjectSettingsController($scope) {
 		alert('Project ' + $scope.project.name + ' was saved');
 	};
 
+	$scope.confirmedDelete = function() {
+		console.log($scope.retypedProjectName);
+		if ($scope.retypedProjectName == $scope.project.name) {
+			$scope.hideConfirm();
+			alert('Project was deleted');
+			$location.path('/projects');
+		} else {
+			alert('Project names does not match');
+		}
+	};
+
 }
-ProjectSettingsController.$inject = ['$scope'];
+ProjectSettingsController.$inject = ['$scope', '$location'];
 
 function ProjectMembersController($scope) {
 	$scope.project = {
