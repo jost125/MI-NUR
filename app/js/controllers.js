@@ -412,6 +412,7 @@ function ProjectDetailController($scope, $rootScope) {
 	$scope.$watch($scope.getHeight, function(newValue, oldValue) {
 		var viewHeight = newValue - angular.element('.projectMenu').height() - angular.element('.mainMenu').height() - 40;
 		angular.element('.taskBox').height(viewHeight);
+		angular.element('.tasks').height(viewHeight - 30);
 	});
 
 	$scope.$watch('tasks', function(newTasks, oldTasks) {
