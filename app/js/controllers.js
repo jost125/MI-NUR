@@ -341,6 +341,18 @@ function ProjectDetailController($scope, $rootScope) {
 		return filteredTasks;
 	};
 
+	$scope.getMyWork = function() {
+		var allTasks = $scope.getAllTasks();
+		var filteredTasks = [];
+		for (var i in allTasks) {
+			if (allTasks[i].assignee === $rootScope.userName) {
+				filteredTasks.push(allTasks[i]);
+			}
+		}
+
+		return filteredTasks;
+	};
+
 	$scope.getHeight = function() {
 		return $(window).height();
 	};
