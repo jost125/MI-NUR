@@ -374,7 +374,10 @@ function ProjectDetailController($scope, $rootScope) {
 
 	$scope.jumpToTask = function(task) {
 		$scope.boxes[task.taskCategory].show = true;
-		angular.element(window).scrollTo(angular.element('li[data-task-id=' + task.id + ']').position());
+		var taskElement = angular.element('li[data-task-id=' + task.id + ']');
+		angular.element(window).scrollTo(taskElement.position());
+		taskElement.fadeTo('slow', 0.1).fadeTo('slow', 1.0);
+
 	};
 
 	$scope.getHeight = function() {
