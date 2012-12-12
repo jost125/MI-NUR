@@ -106,6 +106,28 @@ body {
 	list-style: none;
 }
 
+.tasks > li {
+	background-color: #E2DEDE;
+	border-bottom: 1px solid #D2CECE;
+}
+
+.tasks > li.expanded {
+	background-color: #F2EEEE;
+	border-bottom: 1px solid #D2CECE;
+}
+
+.tasks .taskEditForm {
+	border-bottom: #D2CECE 1px solid;
+}
+
+.tasks .comments {
+	background-color: #F9F5F5;
+}
+
+.tasks .comment {
+	border-bottom: 1px solid #E2DEDE;
+}
+
 .doneTasks > li {
 	background-color: #D6E9C6;
 	border-bottom: 1px solid #C6D9C6;
