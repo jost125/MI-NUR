@@ -109,7 +109,7 @@ function ProjectDetailController($scope, $rootScope) {
 
 	$scope.tasks = {
 		'done': [
-			{'name': 'Complete hifi prototype', 'type': 'Issue', assigneeInicials: null, nextAction: null, state: 'Finished', difficulty: 1, expand: false, id: 1, comments: []},
+			{'name': 'Complete hifi prototype', 'type': 'Issue', assigneeInicials: null, nextAction: null, state: 'Finished', difficulty: 1, expand: false, id: 1, comments: []}
 		],
 		'current': [
 			{'name': 'Write backend for logging', 'type': 'Issue', assigneeInicials: null, nextAction: 'Start', state: 'New', difficulty: 1, expand: false, id: 2, comments: []},
@@ -194,42 +194,34 @@ function ProjectDetailController($scope, $rootScope) {
 		$scope.boxes.mywork.show = !$scope.boxes.mywork.show;
 	};
 
-	$scope.toggleTask = function(index, type) {
-		if (type === 'current') {
-			$scope.tasks.current[index].expand = !$scope.tasks.current[index].expand;
-		} else if (type === 'done') {
-			$scope.tasks.done[index].expand = !$scope.tasks.done[index].expand;
-		}
+	$scope.toggleTask = function(index, taskCategory) {
+		var task = $scope.searchTaskInCategory(index, taskCategory);
+		task.expand = !task.expand;
 	};
 
-	$scope.deleteTask = function(reallyWantToDelete, index, type) {
+	$scope.deleteTask = function(reallyWantToDelete, index, taskCategory) {
 		if (!reallyWantToDelete) {
 			alert('If you want to delete this task, check the checkbox');
 			return;
 		}
-		if (type === 'current') {
-			$scope.tasks.current.splice(index, 1);
-		}
+		$scope.getTaskCategory(taskCategory).splice(index, 1);
 	};
 
 	$scope.setNextAction = function(task) {
 		task.nextAction = $scope.searchTaskStateByName(task.state).action;
 	};
 
-	$scope.addComment = function(index, type, commentText) {
-		if (type === 'current') {
-			$scope.tasks.current[index].comments.push({text: commentText, author: $rootScope.userName});
-		}
+	$scope.addComment = function(index, taskCategory, commentText) {
+		var task = $scope.searchTaskInCategory(index, taskCategory);
+		task.comments.push({text: commentText, author: $rootScope.userName});
 	};
 
-	$scope.nextState = function(index, type) {
-		if (type === 'current') {
-			var stateName = $scope.tasks.current[index].state;
-			var taskState = $scope.searchTaskStateByName(stateName);
-
-			$scope.tasks.current[index].state = taskState.next;
-			$scope.tasks.current[index].nextAction = taskState.next !== null ? $scope.searchTaskStateByName(taskState.next).action : null;
-		}
+	$scope.nextState = function(index, taskCategory) {
+		var task = $scope.searchTaskInCategory(index, taskCategory);
+		var stateName = task.state;
+		var taskState = $scope.searchTaskStateByName(stateName);
+		task.state = taskState.next;
+		task.nextAction = taskState.next !== null ? $scope.searchTaskStateByName(taskState.next).action : null;
 	};
 
 	$scope.searchTaskStateByName = function(stateName) {
@@ -242,7 +234,24 @@ function ProjectDetailController($scope, $rootScope) {
 		}
 
 		return taskState;
-	}
+	};
+
+	$scope.searchTaskInCategory = function(index, taskCategory) {
+		return $scope.getTaskCategory(taskCategory)[index];
+	};
+
+	$scope.getTaskCategory = function (taskCategory) {
+		if (taskCategory === 'current') {
+			return $scope.tasks.current;
+		} else if (taskCategory === 'done') {
+			return $scope.tasks.done;
+		} else if (taskCategory === 'icebox') {
+			return $scope.tasks.icebox;
+		} else if (taskCategory === 'backlog') {
+			return $scope.tasks.backlog;
+		}
+		return null;
+	};
 
 	$scope.search = function(phrase) {
 		$scope.boxes.search.show = phrase != '';
