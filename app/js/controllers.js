@@ -217,6 +217,13 @@ function ProjectDetailController($scope, $rootScope) {
 		task.comments.push({text: commentText, author: $rootScope.userName});
 	};
 
+	$scope.nextStateAndMoveToCurrent = function(index, taskCategory) {
+		$scope.nextState(index, taskCategory);
+		var task = $scope.searchTaskInCategory(index, taskCategory);
+		$scope.tasks.current.push(task);
+		$scope.getTaskCategory(taskCategory).splice(index, 1);
+	}
+
 	$scope.nextState = function(index, taskCategory) {
 		var task = $scope.searchTaskInCategory(index, taskCategory);
 		var stateName = task.state;

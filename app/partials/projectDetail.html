@@ -247,7 +247,7 @@
 								{{ task.difficulty }}
 							</div>
 							<div ng-show="!task.expand && !(task.state == 'Finished')" class="btn-group pull-right" style="width: 70px; display: inline-block; margin-top: -2px;">
-								<button class="btn btn-mini" ng-click="nextState(index, 'backlog')">{{ task.nextAction }}</button>
+								<button class="btn btn-mini" ng-click="nextStateAndMoveToCurrent(index, 'backlog')">{{ task.nextAction }}</button>
 								<button class="btn btn-mini dropdown-toggle" data-toggle="dropdown">
 									<span class="caret"></span>
 								</button>
