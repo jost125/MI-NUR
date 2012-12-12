@@ -103,6 +103,8 @@ function ProjectDetailController($scope, $rootScope) {
 		}
 	};
 
+	$scope.lastId = 12;
+
 	$scope.span = 4;
 
 	$scope.currentIteration = 3;
@@ -166,8 +168,27 @@ function ProjectDetailController($scope, $rootScope) {
 		$scope.showAddTaskModal = false;
 	};
 
-	$scope.addTask = function(task) {
-		$scope.tasks.icebox.push({'name': task.name});
+	$scope.addTask = function(task, comment) {
+		if (!task) {
+			task = {};
+		}
+		if (task.assignee) {
+			task.assigneeInicials = $scope.searchUserByName(task.assignee).initials;
+		}
+		task.difficulty = task.difficulty ? task.difficulty : 0;
+		task.type = task.type ? task.type : 'Issue';
+		task.expand = false;
+		task.id = $scope.lastId++;
+		task.nextAction = 'Start';
+		task.state = 'New';
+		task.comments = [];
+		task.taskCategory = 'icebox';
+		if (comment) {
+			task.comments.push(comment);
+		}
+
+		console.log(task);
+		$scope.tasks.icebox.push(task);
 		$scope.hideAddTask();
 		$scope.boxes.icebox.show = true;
 	};
@@ -368,7 +389,6 @@ function ProjectDetailController($scope, $rootScope) {
 	});
 
 	$scope.$watch('tasks', function(newTasks, oldTasks) {
-		console.log(newTasks);
 		var i;
 		for (i in $scope.tasks.backlog) {
 			$scope.tasks.backlog[i].state = 'New';
@@ -383,7 +403,6 @@ function ProjectDetailController($scope, $rootScope) {
 				$scope.tasks[taskCategory][i].taskCategory = taskCategory;
 			}
 		}
-		console.log(oldTasks);
 	}, true);
 
 	$scope.$watch('boxes', function(newValue, oldValue) {

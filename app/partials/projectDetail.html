@@ -524,12 +524,12 @@
 				</div>
 				<div class="pull-left" style="padding-left: 40px">
 					<label>Comment</label>
-						<textarea ng-model="task.comment" style="width: 350px; height: 195px"></textarea>
+						<textarea ng-model="comment" style="width: 350px; height: 195px"></textarea>
 				</div>
 		</form>
 	</div>
 	<div class="modal-footer">
 		<a ng-click="hideAddTask()" class="btn">Close</a>
-		<a ng-click="addTask(task)" class="btn btn-primary">Create task</a>
+		<a ng-click="addTask(task, comment)" class="btn btn-primary">Create task</a>
 	</div>
 </div>
