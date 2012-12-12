@@ -109,6 +109,7 @@ function ProjectDetailController($scope, $rootScope) {
 
 	$scope.tasks = {
 		'done': [
+			{'name': 'Complete lowfi prototype', 'type': 'Issue', assigneeInicials: null, nextAction: null, state: 'Finished', difficulty: 1, expand: false, id: 1, comments: []},
 			{'name': 'Complete hifi prototype', 'type': 'Issue', assigneeInicials: null, nextAction: null, state: 'Finished', difficulty: 1, expand: false, id: 1, comments: []}
 		],
 		'current': [

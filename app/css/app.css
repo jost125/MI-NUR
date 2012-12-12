@@ -106,6 +106,28 @@ body {
 	list-style: none;
 }
 
+.doneTasks > li {
+	background-color: #D6E9C6;
+	border-bottom: 1px solid #C6D9C6;
+}
+
+.doneTasks > li.expanded {
+	background-color: #E6F9D6;
+	border-bottom: 1px solid #C6D9C6;
+}
+
+.doneTasks .taskEditForm {
+	border-bottom: #C6D9C6 1px solid;
+}
+
+.doneTasks .comments {
+	background-color: #F6FFE6;
+}
+
+.doneTasks .comment {
+	border-bottom: 1px solid #D6E9C6;
+}
+
 .currentTasks > li {
 	background-color: #FAF2CC;
 	border-bottom: 1px solid #EAE2BB;
@@ -122,6 +144,10 @@ body {
 
 .currentTasks .comments {
 	background-color: #FFFFEE;
+}
+
+.currentTasks .comment {
+	border-bottom: 1px solid #FAF2CC;
 }
 
 .iceboxTasks > li {
@@ -189,9 +215,10 @@ body {
 	font-weight: bold;
 }
 
+
 .comment {
 	padding: 10px 15px;
-	border-bottom: 1px solid #FAF2CC;
+	text-align: justify;
 }
 
 .commentText {
@@ -205,4 +232,3 @@ body {
 .comment.replay div {
 	padding-right: 15px;
 }
-
