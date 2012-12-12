@@ -109,13 +109,13 @@ function ProjectDetailController($scope, $rootScope) {
 
 	$scope.tasks = {
 		'done': [
-			{'name': 'Complete lowfi prototype', 'type': 'Issue', assigneeInicials: null, nextAction: null, state: 'Finished', difficulty: 1, expand: false, id: 1, comments: [], deadline: null},
-			{'name': 'Complete hifi prototype', 'type': 'Issue', assigneeInicials: null, nextAction: null, state: 'Finished', difficulty: 1, expand: false, id: 1, comments: [], deadline: null}
+			{'name': 'Complete lowfi prototype', 'type': 'Issue', assigneeInicials: null, assignee: null, nextAction: null, state: 'Finished', difficulty: 1, expand: false, id: 1, comments: [], deadline: null},
+			{'name': 'Complete hifi prototype', 'type': 'Issue', assigneeInicials: null, assignee: null, nextAction: null, state: 'Finished', difficulty: 1, expand: false, id: 1, comments: [], deadline: null}
 		],
 		'current': [
-			{'name': 'Write backend for logging', 'type': 'Issue', assigneeInicials: null, nextAction: 'Start', state: 'New', difficulty: 1, expand: false, id: 2, comments: [], deadline: null},
-			{'name': 'Write essay', 'type': 'Issue', assigneeInicials: null, nextAction: 'Start', state: 'New', difficulty: 1, expand: false, id: 3, comments: [], deadline: null},
-			{'name': 'CSS are optimized for chrome', 'type': 'Issue', assigneeInicials: null, nextAction: 'Start', state: 'New', difficulty: 1, expand: false, id: 4, deadline: new Date(2012, 12, 12), comments: [
+			{'name': 'Write backend for logging', 'type': 'Issue', assigneeInicials: null, assignee: null, nextAction: 'Start', state: 'New', difficulty: 1, expand: false, id: 2, comments: [], deadline: null},
+			{'name': 'Write essay', 'type': 'Issue', assigneeInicials: null, assignee: null, nextAction: 'Start', state: 'New', difficulty: 1, expand: false, id: 3, comments: [], deadline: null},
+			{'name': 'CSS are optimized for chrome', 'type': 'Issue', assigneeInicials: null, assignee: null, nextAction: 'Start', state: 'New', difficulty: 1, expand: false, id: 4, deadline: new Date(2012, 12, 12), comments: [
 				{
 					text: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.',
 					author: 'Jan Machala'
@@ -125,23 +125,24 @@ function ProjectDetailController($scope, $rootScope) {
 					author: 'Jan Machala'
 				}
 			]},
-			{'name': 'CSS are optimized for firefox', 'type': 'Issue', assigneeInicials: null, nextAction: 'Start', state: 'New', difficulty: 1, expand: false, id: 5, comments: [], deadline: null},
-			{'name': 'CSS are optimized for ie', 'type': 'Issue', assigneeInicials: null, nextAction: 'Start', state: 'New', difficulty: 1, expand: false, id: 6, comments: [], deadline: null},
-			{'name': 'Scrollbar are desiged in boxes', 'type': 'Bug', assigneeInicials: 'JM', nextAction: 'Start', state: 'New', difficulty: 13, expand: false, id: 7, comments: [], deadline: new Date(2012, 12, 20)}
+			{'name': 'CSS are optimized for firefox', 'type': 'Issue', assigneeInicials: null, assignee: null, nextAction: 'Start', state: 'New', difficulty: 1, expand: false, id: 5, comments: [], deadline: null},
+			{'name': 'CSS are optimized for ie', 'type': 'Issue', assigneeInicials: null, assignee: null, nextAction: 'Start', state: 'New', difficulty: 1, expand: false, id: 6, comments: [], deadline: null},
+			{'name': 'Scrollbar are desiged in boxes', 'type': 'Bug', assigneeInicials: 'JM', assignee: 'Jan Machala', nextAction: 'Start', state: 'New', difficulty: 13, expand: false, id: 7, comments: [], deadline: new Date(2012, 12, 20)}
 		],
 		'icebox': [
-			{'name': 'Design is resposive', 'type': 'Issue', assigneeInicials: 'JM', nextAction: 'Start', state: 'New', difficulty: 1, expand: false, id: 8, comments: [], deadline: null}
+			{'name': 'Design is resposive', 'type': 'Issue', assigneeInicials: 'JM', assignee: 'Jan Machala', nextAction: 'Start', state: 'New', difficulty: 1, expand: false, id: 8, comments: [], deadline: null}
 		],
 		'backlog': [
-			{'name': 'CSS are optimized for ie', 'type': 'Issue', assigneeInicials: null, nextAction: 'Start', state: 'New', difficulty: 1, expand: false, id: 9, comments: [], deadline: null},
-			{'name': 'Scrollbar are desiged in boxes', 'type': 'Bug', assigneeInicials: 'JM', nextAction: 'Start', state: 'New', difficulty: 13, expand: false, id: 10, comments: [], deadline: null}
+			{'name': 'CSS are optimized for ie', 'type': 'Issue', assigneeInicials: null, assignee: null, nextAction: 'Start', state: 'New', difficulty: 1, expand: false, id: 9, comments: [], deadline: null},
+			{'name': 'Scrollbar are desiged in boxes', 'type': 'Bug', assigneeInicials: 'JM', assignee: 'Jan Machala', nextAction: 'Start', state: 'New', difficulty: 13, expand: false, id: 10, comments: [], deadline: null}
 		]
 	};
 
 	$scope.taskDifficulties = [1, 2, 3, 5, 8, 13];
 
 	$scope.users = [
-		'Jan Machala'
+		{initials: 'JM', name: 'Jan Machala'},
+		{initials: 'JD', name: 'John Doe'}
 	];
 
 	$scope.taskTypes = [
@@ -294,6 +295,19 @@ function ProjectDetailController($scope, $rootScope) {
 		task.nextAction = taskState.action;
 		$scope.tasks.current.push(task);
 		$scope.tasks.done.splice(index, 1);
+	};
+
+	$scope.setUser = function(task) {
+		task.assigneeInicials = $scope.searchUserByName(task.assignee).initials;
+	};
+
+	$scope.searchUserByName = function(name) {
+		for (var i in $scope.users) {
+			if ($scope.users[i].name === name) {
+				return $scope.users[i];
+			}
+		}
+		return null;
 	};
 
 	$scope.getAllTasks = function() {

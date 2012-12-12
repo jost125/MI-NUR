@@ -79,8 +79,8 @@
 								<div class="control-group">
 									<label class="control-label">Assignee</label>
 									<div class="controls">
-										<select ng-model="task.assignee">
-											<option ng-repeat="user in users">{{ user }}</option>
+										<select ng-model="task.assignee" ng-change="setUser(task)">
+											<option ng-repeat="user in users">{{ user.name }}</option>
 										</select>
 									</div>
 								</div>
@@ -186,8 +186,8 @@
 									<div class="control-group">
 										<label class="control-label">Assignee</label>
 										<div class="controls">
-											<select ng-model="task.assignee">
-												<option ng-repeat="user in users">{{ user }}</option>
+											<select ng-model="task.assignee" ng-change="setUser(task)">
+												<option ng-repeat="user in users">{{ user.name }}</option>
 											</select>
 										</div>
 									</div>
@@ -293,8 +293,8 @@
 									<div class="control-group">
 										<label class="control-label">Assignee</label>
 										<div class="controls">
-											<select ng-model="task.assignee">
-												<option ng-repeat="user in users">{{ user }}</option>
+											<select ng-model="task.assignee" ng-change="setUser(task)">
+												<option ng-repeat="user in users">{{ user.name }}</option>
 											</select>
 										</div>
 									</div>
@@ -399,8 +399,8 @@
 									<div class="control-group">
 										<label class="control-label">Assignee</label>
 										<div class="controls">
-											<select ng-model="task.assignee">
-												<option ng-repeat="user in users">{{ user }}</option>
+											<select ng-model="task.assignee" ng-change="setUser(task)">
+												<option ng-repeat="user in users">{{ user.name }}</option>
 											</select>
 										</div>
 									</div>
@@ -497,8 +497,8 @@
 					<div class="control-group">
 						<label class="control-label">Assignee</label>
 						<div class="controls">
-							<select ng-model="task.assignee">
-								<option ng-repeat="user in users">{{ user }}</option>
+							<select ng-model="task.assignee" ng-change="setUser(task)">
+								<option ng-repeat="user in users">{{ user.name }}</option>
 							</select>
 						</div>
 					</div>
