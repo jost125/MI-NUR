@@ -442,6 +442,16 @@
 			</div>
 		</div>
 		<div class="taskBoxContainer pull-left">
+			<div class="taskBox deadlinesBox" ng-show="boxes.deadlines.show" style="display: none;">
+				<div class="boxHeader">Deadlines</div>
+				<ul class="tasks iceboxTasks">
+					<li ng-repeat="task in getAllDeadlines() | orderBy:deadline" class="item">
+						{{ task.name }}
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="taskBoxContainer pull-left">
 			<div class="taskBox searchBox" ng-show="boxes.search.show" style="display: none;">
 				<div class="boxHeader">Search</div>
 				<ul class="tasks iceboxTasks">
