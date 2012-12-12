@@ -302,6 +302,15 @@ function ProjectDetailController($scope, $rootScope) {
 
 	$scope.$watch('tasks', function(newTasks, oldTasks) {
 		console.log(newTasks);
+		var i;
+		for (i in $scope.tasks.backlog) {
+			$scope.tasks.backlog[i].state = 'New';
+			$scope.tasks.backlog[i].nextAction = 'Start';
+		}
+		for (i in $scope.tasks.icebox) {
+			$scope.tasks.icebox[i].state = 'New';
+			$scope.tasks.icebox[i].nextAction = 'Start';
+		}
 		console.log(oldTasks);
 	}, true);
 
