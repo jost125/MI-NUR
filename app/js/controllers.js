@@ -232,6 +232,17 @@ function ProjectDetailController($scope, $rootScope) {
 		task.nextAction = taskState.next !== null ? $scope.searchTaskStateByName(taskState.next).action : null;
 	};
 
+	$scope.changeStateAndMoveToCurrent = function(index, taskCategory, taskStateName) {
+		var state = $scope.searchTaskStateByName(taskStateName);
+		var task = $scope.searchTaskInCategory(index, taskCategory);
+		task.state = state.name;
+		task.nextAction = state.action;
+		if (task.state !== 'New') {
+			$scope.tasks.current.push(task);
+			$scope.getTaskCategory(taskCategory).splice(index, 1);
+		}
+	};
+
 	$scope.changeState = function(task, taskStateName) {
 		var state = $scope.searchTaskStateByName(taskStateName);
 		task.state = state.name;

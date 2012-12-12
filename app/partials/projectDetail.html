@@ -252,7 +252,7 @@
 									<span class="caret"></span>
 								</button>
 								<ul class="dropdown-menu" style="min-width: 50px; padding-right: 10px; padding-left: 10px;">
-									<li ng-repeat="taskState in taskStates">
+									<li ng-repeat="taskState in taskStates" ng-click="changeStateAndMoveToCurrent(index, 'backlog', taskState.name)">
 										{{ taskState.name }}
 									</li>
 								</ul>
