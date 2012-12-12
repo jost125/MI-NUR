@@ -233,8 +233,104 @@
 			<div class="taskBox backlogBox" ng-show="boxes.backlog.show">
 				<div class="boxHeader">Backlog</div>
 				<ul ui-multi-sortable ng-model="tasks" model-subset="backlog" class="tasks backlogTasks">
-					<li ng-repeat="task in tasks.backlog" class="item">
-						{{ task.name }}
+					<li ng-repeat="(index, task) in tasks.backlog" class="item" ng-class="{expanded: task.expand, finished: task.state == 'Finished'}">
+						<div>
+							<div style="display: inline-block;">
+								<i ng-class="{true:'icon-chevron-down', false:'icon-chevron-right'}[task.expand]" ng-click="toggleTask(index, 'backlog')"></i>
+								<span class="taskType" ng-class="{Issue:'issue', Bug:'bug'}[task.type]"></span>
+								<span class="taskName">
+									{{ task.name }}
+								</span>
+								<a class="assigne-inicials" href="#/mywork:{{ task.assigneeInicials | lowercase }}">{{ task.assigneeInicials }}</a>
+							</div>
+							<div ng-show="!task.expand" class="pull-right" style="width: 11px; display: inline-block;">
+								{{ task.difficulty }}
+							</div>
+							<div ng-show="!task.expand && !(task.state == 'Finished')" class="btn-group pull-right" style="width: 70px; display: inline-block; margin-top: -2px;">
+								<button class="btn btn-mini" ng-click="nextState(index, 'backlog')">{{ task.nextAction }}</button>
+								<button class="btn btn-mini dropdown-toggle" data-toggle="dropdown">
+									<span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu" style="min-width: 50px; padding-right: 10px; padding-left: 10px;">
+									<li ng-repeat="taskState in taskStates">
+										{{ taskState.name }}
+									</li>
+								</ul>
+							</div>
+						</div>
+
+						<div ng-show="task.expand">
+							<form class="form-horizontal taskEditForm clearfix">
+								<div>
+									<div class="control-group">
+										<label class="control-label">Task name</label>
+										<div class="controls">
+											<input ng-model="task.name" type="text">
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">Task type</label>
+										<div class="controls">
+											<select ng-model="task.type">
+												<option ng-repeat="taskType in taskTypes">{{ taskType }}</option>
+											</select>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">Difficulty</label>
+										<div class="controls">
+											<input ng-model="task.difficulty" type="text">
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">State</label>
+										<div class="controls">
+											<select ng-model="task.state" ng-change="setNextAction(task)">
+												<option ng-repeat="taskState in taskStates">{{ taskState.name }}</option>
+											</select>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">Assignee</label>
+										<div class="controls">
+											<select ng-model="task.assignee">
+												<option ng-repeat="user in users">{{ user }}</option>
+											</select>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label">Deadline</label>
+										<div class="controls">
+											<input ng-model="task.deadline" type="date" ui-date>
+										</div>
+									</div>
+								</div>
+							</form>
+
+							<form class="form-inline taskDeleteForm">
+								<label class="checkbox">
+									<input type="checkbox" ng-model="reallyWantToDelete"> I really want to delete this task
+								</label>
+								<button type="submit" class="btn" ng-click="deleteTask(reallyWantToDelete, index, 'backlog')">Delete task</button>
+							</form>
+
+							<p class="commentsHeader">Comments</p>
+							<div class="comments">
+								<div ng-repeat="comment in task.comments" class="comment">
+									<p>{{ comment.author }}</p>
+									<p class="commentText">{{ comment.text }}</p>
+								</div>
+								<div class="comment replay">
+									<div>
+										<form>
+											<textarea ng-model="commentText"></textarea>
+											<button class="btn" ng-click="addComment(index, 'backlog', commentText)">Add comment</button>
+										</form>
+									</div>
+								</div>
+							</div>
+						</div>
+
 					</li>
 				</ul>
 			</div>
