@@ -156,7 +156,24 @@ body {
 }
 
 .backlogTasks > li {
+	background-color: #E2DEDE;
+	border-bottom: 1px solid #D2CECE;
+}
+
+.backlogTasks > li.expanded {
 	background-color: #F2EEEE;
+	border-bottom: 1px solid #D2CECE;
+}
+
+.backlogTasks .taskEditForm {
+	border-bottom: #D2CECE 1px solid;
+}
+
+.backlogTasks .comments {
+	background-color: #F9F5F5;
+}
+
+.backlogTasks .comment {
 	border-bottom: 1px solid #E2DEDE;
 }
 
