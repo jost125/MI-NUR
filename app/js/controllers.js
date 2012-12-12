@@ -109,12 +109,12 @@ function ProjectDetailController($scope, $rootScope) {
 
 	$scope.tasks = {
 		'done': [
+			{'name': 'Complete hifi prototype', 'type': 'Issue', assigneeInicials: null, nextAction: null, state: 'Finished', difficulty: 1, expand: false, id: 1, comments: []},
 		],
 		'current': [
-			{'name': 'Complete prototype', 'type': 'Issue', assigneeInicials: null, nextState: 'Start', difficulty: 1, expand: false, id: 1, comments: []},
-			{'name': 'Write backend for logging', 'type': 'Issue', assigneeInicials: null, nextState: 'Start', difficulty: 1, expand: false, id: 2, comments: []},
-			{'name': 'Write essay', 'type': 'Issue', assigneeInicials: null, nextState: 'Start', difficulty: 1, expand: false, id: 3, comments: []},
-			{'name': 'CSS are optimized for chrome', 'type': 'Issue', assigneeInicials: null, nextState: 'Start', difficulty: 1, expand: false, id: 4, comments: [
+			{'name': 'Write backend for logging', 'type': 'Issue', assigneeInicials: null, nextAction: 'Start', state: 'New', difficulty: 1, expand: false, id: 2, comments: []},
+			{'name': 'Write essay', 'type': 'Issue', assigneeInicials: null, nextAction: 'Start', state: 'New', difficulty: 1, expand: false, id: 3, comments: []},
+			{'name': 'CSS are optimized for chrome', 'type': 'Issue', assigneeInicials: null, nextAction: 'Start', state: 'New', difficulty: 1, expand: false, id: 4, comments: [
 				{
 					text: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.',
 					author: 'Jan Machala'
@@ -124,16 +124,16 @@ function ProjectDetailController($scope, $rootScope) {
 					author: 'Jan Machala'
 				}
 			]},
-			{'name': 'CSS are optimized for firefox', 'type': 'Issue', assigneeInicials: null, nextState: 'Start', difficulty: 1, expand: false, id: 5, comments: []},
-			{'name': 'CSS are optimized for ie', 'type': 'Issue', assigneeInicials: null, nextState: 'Start', difficulty: 1, expand: false, id: 6, comments: []},
-			{'name': 'Scrollbar are desiged in boxes', 'type': 'Bug', assigneeInicials: 'JM', nextState: 'Start', difficulty: 13, expand: false, id: 7, comments: []}
+			{'name': 'CSS are optimized for firefox', 'type': 'Issue', assigneeInicials: null, nextAction: 'Start', state: 'New', difficulty: 1, expand: false, id: 5, comments: []},
+			{'name': 'CSS are optimized for ie', 'type': 'Issue', assigneeInicials: null, nextAction: 'Start', state: 'New', difficulty: 1, expand: false, id: 6, comments: []},
+			{'name': 'Scrollbar are desiged in boxes', 'type': 'Bug', assigneeInicials: 'JM', nextAction: 'Start', state: 'New', difficulty: 13, expand: false, id: 7, comments: []}
 		],
 		'icebox': [
-			{'name': 'Design is resposive', 'type': 'Issue', assigneeInicials: 'JM', nextState: 'Start', difficulty: 1, expand: false, id: 8, comments: []}
+			{'name': 'Design is resposive', 'type': 'Issue', assigneeInicials: 'JM', nextAction: 'Start', state: 'New', difficulty: 1, expand: false, id: 8, comments: []}
 		],
 		'backlog': [
-			{'name': 'CSS are optimized for ie', 'type': 'Issue', assigneeInicials: null, nextState: 'Start', difficulty: 1, expand: false, id: 9, comments: []},
-			{'name': 'Scrollbar are desiged in boxes', 'type': 'Bug', assigneeInicials: 'JM', nextState: 'Start', difficulty: 13, expand: false, id: 10, comments: []}
+			{'name': 'CSS are optimized for ie', 'type': 'Issue', assigneeInicials: null, nextAction: 'Start', state: 'New', difficulty: 1, expand: false, id: 9, comments: []},
+			{'name': 'Scrollbar are desiged in boxes', 'type': 'Bug', assigneeInicials: 'JM', nextAction: 'Start', state: 'New', difficulty: 13, expand: false, id: 10, comments: []}
 		]
 	};
 
@@ -148,10 +148,10 @@ function ProjectDetailController($scope, $rootScope) {
 		'Bug'
 	];
 
-	$scope.nextTaskStates = [
-		'Start',
-		'Finish',
-		'Done'
+	$scope.taskStates = [
+		{name: 'New', next: 'Started', action: 'Start'},
+		{name: 'Started', next: 'Finished', action: 'Finish'},
+		{name: 'Finished', next: null, nextAction: null}
 	];
 
 	$scope.showAddTaskModal = false;
@@ -197,6 +197,8 @@ function ProjectDetailController($scope, $rootScope) {
 	$scope.toggleTask = function(index, type) {
 		if (type === 'current') {
 			$scope.tasks.current[index].expand = !$scope.tasks.current[index].expand;
+		} else if (type === 'done') {
+			$scope.tasks.done[index].expand = !$scope.tasks.done[index].expand;
 		}
 	};
 
@@ -210,11 +212,37 @@ function ProjectDetailController($scope, $rootScope) {
 		}
 	};
 
+	$scope.setNextAction = function(task) {
+		task.nextAction = $scope.searchTaskStateByName(task.state).action;
+	};
+
 	$scope.addComment = function(index, type, commentText) {
 		if (type === 'current') {
 			$scope.tasks.current[index].comments.push({text: commentText, author: $rootScope.userName});
 		}
 	};
+
+	$scope.nextState = function(index, type) {
+		if (type === 'current') {
+			var stateName = $scope.tasks.current[index].state;
+			var taskState = $scope.searchTaskStateByName(stateName);
+
+			$scope.tasks.current[index].state = taskState.next;
+			$scope.tasks.current[index].nextAction = taskState.next !== null ? $scope.searchTaskStateByName(taskState.next).action : null;
+		}
+	};
+
+	$scope.searchTaskStateByName = function(stateName) {
+		var taskState;
+		for (var i in $scope.taskStates) {
+			if ($scope.taskStates[i].name === stateName) {
+				taskState = $scope.taskStates[i];
+				break;
+			}
+		}
+
+		return taskState;
+	}
 
 	$scope.search = function(phrase) {
 		$scope.boxes.search.show = phrase != '';
@@ -224,6 +252,14 @@ function ProjectDetailController($scope, $rootScope) {
 			var position = searchBoxElement.position();
 			angular.element(window).scrollTo(position.left, position.top);
 		}
+	};
+
+	$scope.moveDoneToCurrent = function(index) {
+		var task = $scope.tasks.done[index];
+		var taskState = $scope.searchTaskStateByName(task.state);
+		task.nextAction = taskState.action;
+		$scope.tasks.current.push(task);
+		$scope.tasks.done.splice(index, 1);
 	};
 
 	$scope.getAllTasks = function() {
