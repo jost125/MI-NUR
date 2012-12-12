@@ -145,7 +145,7 @@
 									<span class="caret"></span>
 								</button>
 								<ul class="dropdown-menu" style="min-width: 50px; padding-right: 10px; padding-left: 10px;">
-									<li ng-repeat="taskState in taskStates">
+									<li ng-repeat="taskState in taskStates" ng-click="changeState(task, taskState.name)">
 										{{ taskState.name }}
 									</li>
 								</ul>

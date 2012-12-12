@@ -232,6 +232,12 @@ function ProjectDetailController($scope, $rootScope) {
 		task.nextAction = taskState.next !== null ? $scope.searchTaskStateByName(taskState.next).action : null;
 	};
 
+	$scope.changeState = function(task, taskStateName) {
+		var state = $scope.searchTaskStateByName(taskStateName);
+		task.state = state.name;
+		task.nextAction = state.action;
+	};
+
 	$scope.searchTaskStateByName = function(stateName) {
 		var taskState;
 		for (var i in $scope.taskStates) {
